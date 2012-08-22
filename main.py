@@ -4,7 +4,11 @@ from CmdLine import *
 
 def main():
 	interpretor = CmdLine()
-	interpretor.cmdloop()
+	l = interpretor.precmd('launch')
+	r = interpretor.onecmd(l)
+	r = interpretor.postcmd(r,l)
+	if not r:
+		interpretor.cmdloop()
 
 if __name__ == '__main__':
 	main()
