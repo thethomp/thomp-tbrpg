@@ -12,8 +12,6 @@ save format - [player,map]
 
 """
 
-
-
 #######################
 # Utility methods
 #######################
@@ -21,12 +19,35 @@ save format - [player,map]
 def red( txt ):
 	return Fore.RED + txt + Fore.RESET
 
+def red_bg( txt ):
+	return Back.RED + txt + Back.RESET
+
 def green( txt ):
 	return Fore.GREEN + txt + Fore.RESET
+
+def green_bg( txt ):
+	return Back.GREEN + txt + Back.RESET
 
 def magenta( txt ):
 	return Fore.MAGENTA + txt + Fore.RESET	
 
+def magenta_bg( txt ):
+	return Back.MAGENTA + txt + Back.RESET	
+
+def yellow( txt ):
+	return Fore.YELLOW + txt + Fore.RESET
+
+def yellow_bg( txt ):
+	return Back.YELLOW + txt + Back.RESET
+
+def cyan( txt ):
+	return Fore.CYAN + txt + Fore.RESET
+
+def cyan_bg( txt ):
+	return Back.CYAN + txt + Back.RESET
+
+def white_bg( txt ):
+	return Back.WHITE + txt + Back.RESET
 
 ##########################
 # Command line class
@@ -47,7 +68,7 @@ class CmdLine(cmd.Cmd):
 	#def preloop(self):
 	#	print 'Hello'
 	def do_launch(self, s):
-		print "Welcome to Thomp's Text Based RPG!"
+		print cyan('Welcome ') +  yellow('to') + magenta(" Thomp's") + green(" Text Based") + red(" RPG!")
 		print "(1) New Game"
 		print "(2) Load Game"
 		response = raw_input('What would you like to do? ')
@@ -122,7 +143,8 @@ class CmdLine(cmd.Cmd):
 			print 'No active player to save'
 		else:
 			to_save = [self.player, self.map]	
-			pickle.dump( to_save, open(str(s) + '.p', 'wb') )	
+			pickle.dump( to_save, open(str(s) + '.p', 'wb') )
+			print 'Game saved to ' + str(s) + '.p'
 
 	def do_load(self, file):
 		if file == '':
