@@ -4,8 +4,9 @@ from Room import *
 class Map(object):
 	
 	def __init__(self):
+		yaml_path = 'config/map.yaml'
 		self.rooms = {}
-		room_data = yaml.load_all( open('map.yaml', 'r') )
+		room_data = yaml.load_all( open(yaml_path, 'r') )
 		for d in room_data:
 			newroom = Room()
 			newroom.setDescription(d['description'])

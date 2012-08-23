@@ -137,23 +137,25 @@ class CmdLine(cmd.Cmd):
 		print 'MP: ' + str(self.player.getMP())	
 
 	def do_save(self, s):
+		save_path = 'saved_games/'
 		if s == '':
 			print 'Enter a filename to save with'
 		elif self.player == None:
 			print 'No active player to save'
 		else:
 			to_save = [self.player, self.map]	
-			pickle.dump( to_save, open(str(s) + '.p', 'wb') )
-			print 'Game saved to ' + str(s) + '.p'
+			pickle.dump( to_save, open( save_path + str(s) + '.p', 'wb') )
+			print 'Game saved to ' + save_path + str(s) + '.p'
 
 	def do_load(self, file):
+		load_path = 'saved_games/'
 		if file == '':
 			print 'Enter a filename to load'
 		else:
 			if not file.endswith('.p'):
 				file = file + '.p'
-			print 'Loading game ' + file + ' ...'
-			to_load = pickle.load( open( file, 'rb') )
+			print 'Loading game ' + load_path + file + ' ...'
+			to_load = pickle.load( open(load_path + file, 'rb') )
 			self.player = to_load[0]
 			self.map = to_load[1]
 			
@@ -165,6 +167,9 @@ class CmdLine(cmd.Cmd):
 		self.player.setPos((5,5))
 
 	def do_exit(self, s):
+		return True
+
+	def do_quit(self,s):
 		return True
 
 	def do_attack(self, s):
@@ -197,6 +202,10 @@ class CmdLine(cmd.Cmd):
 		print red('WARNING - If you give the name of a file that already exists, this file will be overwritten.')
 
 	def help_exit(self):
+		print 'Exit Game'
+		print red('WARNING - Any unsaved changes will be lost.')
+	
+	def help_quit(self):
 		print 'Exit Game'
 		print red('WARNING - Any unsaved changes will be lost.')
 
