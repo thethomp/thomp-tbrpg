@@ -19,3 +19,9 @@ Commands to implement:
 2. Interactable items (chests, keys/doors, etc)
 3. NPC Dialogue exchange
 4. Combat
+
+
+Tackling Next:
+** Inventory System
+	* Highlight items that can be examined or picked up in the 'look' text.
+	* Create key and door that can't be opened without the key to exemplify interactable objects.
