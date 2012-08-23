@@ -1,0 +1,21 @@
+-- Command Line Parser --
+1. Implement shortcuts for commands (e.g. look = l)
+
+Commands to implement:
+	examine
+	take
+	equip
+	put
+	drop
+	search, forage, gather
+	use (potion, apply enchantment, eat food)
+	stats
+	abilities
+	interact
+	pick (lock)
+
+-- Major Mechanics --
+1. Inventory system
+2. Interactable items (chests, keys/doors, etc)
+3. NPC Dialogue exchange
+4. Combat
