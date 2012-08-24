@@ -26,5 +26,8 @@ DONE ** Inventory System
 DONE 	* Highlight items that can be examined or picked up in the 'look' text.
 DONE	* Create key and door that can't be opened without the key to exemplify interactable objects.
 ** Combat!!
-	* Implement stats. Strength, Intellect, to start.
-	* Create items to equip. Staff and a sword?
+DONE	* Implement stats. Strength, Intellect, to start.
+DONE	* Create items to equip. Staff and a sword?
+	* Show equipped items when looking at inventory.
+	* Add shortened version of inventory - inv.
+	* Add unequip command. 

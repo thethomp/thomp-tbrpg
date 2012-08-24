@@ -51,6 +51,17 @@ class CmdLine(cmd.Cmd):
 	# Action methods
 	######################
 
+	def do_equip( self, s ):
+		item = self.player.getInventoryItemByName(s)
+		if item == None:
+			print "You can't equip an item you don't have!"
+		else:
+			if not item.getEquippable():
+				print "You can't equip that item!"
+			else:
+				print yellow(s) + ' equipped!'
+				self.player.equipItem(item)
+
 	def do_attack( self, s ):
 		enemy = Enemy()
 		i = CombatCmdLine(enemy)
@@ -171,6 +182,8 @@ class CmdLine(cmd.Cmd):
 	def do_stats(self, s):
 		print 'HP: ' + str(self.player.getHP())
 		print 'MP: ' + str(self.player.getMP())	
+		print 'Strength: ' + str(self.player.getStrength())	
+		print 'Intellect: ' + str(self.player.getIntellect())	
 
 	def do_save(self, s):
 		save_path = 'saved_games/'

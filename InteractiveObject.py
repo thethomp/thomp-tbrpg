@@ -9,6 +9,9 @@ class InteractiveObject(object):
 		self.unlock_items = []
 		self.keywords = []
 		self.examine_text = ''
+		self.equippable = None
+		self.strength = 0
+		self.intellect = 0
 
 	def setItems(self, items):
 		self.items = items
@@ -46,3 +49,21 @@ class InteractiveObject(object):
 
 	def getExamineText(self):
 		return self.examine_text
+
+	def getEquippable(self):
+		return self.equippable
+
+	def setEquippable(self, bool):
+		self.equippable = bool
+
+	def getStrength(self):
+		return self.strength
+
+	def setStrength(self, num):
+		self.strength = num
+
+	def getIntellect(self):
+		return self.intellect
+
+	def setIntellect(self, num):
+		self.intellect = num

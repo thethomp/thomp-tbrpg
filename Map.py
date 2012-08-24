@@ -25,6 +25,10 @@ class Map(object):
 				new_obj.setKeywords(item['keyword'])
 				new_obj.setDirectionToChange(item['map_side_to_change'])
 				new_obj.setExamineText(item['examine_text'])
+				new_obj.setEquippable(item['equippable'])
+				if new_obj.getEquippable():
+					new_obj.setStrength(item['strength'])
+					new_obj.setIntellect(item['intellect'])
 				room_items.append(new_obj)		
 			newroom.setItems(room_items)
 

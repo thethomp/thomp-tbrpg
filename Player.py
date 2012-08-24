@@ -1,9 +1,13 @@
 import string
+from InteractiveObject import *
 
 class Player(object):
 	
 	def __init__(self):
 		self.inventory = []
+		self.equipped = []
+		self.strength = 0
+		self.intellect = 0
 		self.hp = 10
 		self.mp = 10
 		self.pos = (0,0)
@@ -31,4 +35,26 @@ class Player(object):
 			if string.lower(i.getName()) == string.lower(name):
 				return i
 		return None
+
+	def getEquipped(self):
+		return self.equipped
+
+	def equipItem(self, i):
+		self.equipped.append(i)
+		self.inventory.remove(i)
+		self.strength += i.getStrength()
+		self.intellect += i.getIntellect()
+
+	def unequipItem(self, i):
+		self.inventory.append(i)
+		self.equipped.remove(i)
+		self.strength -= i.getStrength()
+		self.intellect -= i.getIntellect()
+
+	def getStrength(self):
+		return self.strength
+
+	def getIntellect(self):
+		return self.intellect
+
 	
