@@ -40,10 +40,9 @@ class CmdLine(cmd.Cmd):
 			filename = raw_input('File to load: ')
 			if not filename.endswith('.p'):
 				filename = filename + '.p'
-			if os.path.exists(filename):
 				self.onecmd('load ' + filename)
-			else:
-				print filename + " can't be found"
+			#else:
+			#	print filename + " can't be found"
 
 	######################
 	# Action methods

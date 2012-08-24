@@ -27,7 +27,7 @@ class Room(object):
 	def getEast(self):
 		return self.east
 
-	def getDescriptionByName(self, str):
+	def getDirectionByName(self, str):
 		if str == 'north':
 			return self.north
 		elif str == 'south':
