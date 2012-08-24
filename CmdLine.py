@@ -4,7 +4,7 @@ from Parser import *
 from Player import *
 from Map import *
 from Room import *
-from TextUtilities import red, red_bg, green, green_bg, magenta, magenta_bg, yellow, yellow_bg, cyan, cyan_bg, white_bg
+from TextUtilities import red, red_bg, green, green_bg, magenta, magenta_bg, yellow, yellow_bg, cyan, cyan_bg, white_bg, bright
 
 """
 General notes ---
@@ -49,9 +49,19 @@ class CmdLine(cmd.Cmd):
 	# Action methods
 	######################
 
+	def do_drop( self , s ):
+		cur_room = self.map.getRooms()[self.player.getPos()]
+		itemtodrop = self.player.getInventoryItemByName(s.strip())
+		if itemtodrop == None:
+			print self.parser.parseDescription("You don't have a <i>" + s + " to drop.")
+		else:
+			cur_room.addToDroppedItems(itemtodrop)
+			self.player.getInventory().remove(itemtodrop)
+			print self.parser.parseDescription("You dropped <i>" + s + '.')	
+
 	def do_use( self, s ):
 		if len(s.split()) < 3:
-			print "USE syntax: use <item1> on <item2>"
+			print self.parser.parseDescription("USE syntax: use <i><item1> on <i><item2>")
 			return
 		cur_room = self.map.getRooms()[self.player.getPos()]
 		room_items = cur_room.getItems()
@@ -62,18 +72,23 @@ class CmdLine(cmd.Cmd):
 		if string.lower(playeritem.getName()) in roomitem.getUnlockItems():
 			cur_room.modifyDirectionalBoundary(roomitem.getDirectionToChange())
 			print 'You used ' + yellow(string1) + ' on ' + yellow(string2) + '.'
-			print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has opened!'
+			if cur_room.getDirectionByName(roomitem.getDirectionToChange()):
+				print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has opened!'
+			else:
+				print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has closed!'
 		else:
 			print "You can't use " + yellow(string1) + ' on ' + yellow(string2) + '!'
 
 	def do_take( self, s ):
 		cur_room = self.map.getRooms()[self.player.getPos()]
-		for item in cur_room.getItems():
+		for item in cur_room.getItems() + cur_room.getDroppedItems():
 			if string.lower(item.getName()) == string.lower(s):
 				if 'take' in item.getKeywords():
 					print yellow(item.getName()) + ' added to your' + magenta(' inventory')
 					self.player.addToInventory(item)
-					cur_room.getItems().remove(item)
+					# Either remove the item from the list of room items, or list of dropped room items
+					try: cur_room.getItems().remove(item)
+					except ValueError: cur_room.getDroppedItems().remove(item)
 					return		
 				else:
 					print red("You can't take that.")
@@ -82,7 +97,7 @@ class CmdLine(cmd.Cmd):
 
 	def do_examine( self, s ):
 		cur_room = self.map.getRooms()[self.player.getPos()]
-		for item in cur_room.getItems():
+		for item in cur_room.getItems() + cur_room.getDroppedItems():
 			if string.lower(item.getName()) == string.lower(s):
 				print self.parser.parseDescription(item.getExamineText())
 				return
@@ -92,25 +107,29 @@ class CmdLine(cmd.Cmd):
 		inv = self.player.getInventory()
 		print magenta('=== INVENTORY ===')
 		for item in inv:
-			print magenta(item.getName())
+			print yellow(item.getName())
 		print magenta('=================')
 
 	def do_look(self, s):
 		cur_room = self.map.getRooms()[self.player.getPos()]
 		if s == '':
-			print magenta(cur_room.description)
+			print self.parser.parseDescription(cur_room.description)
 		elif s.lower() == 'north':
 			print self.parser.parseDescription(cur_room.north_desc)
 			#print magenta(cur_room.north_desc)
 		elif s.lower() == 'south':
-			print magenta(cur_room.south_desc)
+			print self.parser.parseDescription(cur_room.south_desc)
 		elif s.lower() == 'east':
 			print self.parser.parseDescription(cur_room.east_desc)
 			#print magenta(cur_room.east_desc)
 		elif s.lower() == 'west':
-			print magenta(cur_room.west_desc)
+			print self.parser.parseDescription(cur_room.west_desc)
 		else:
 			return
+		if len(cur_room.getDroppedItems()) > 0:
+			print "=== Dropped Items ==="
+			for i in cur_room.getDroppedItems():
+				print yellow(i.getName())
 
 	def do_move(self, s):
 		cur_room = self.map.getRooms()[self.player.getPos()]
@@ -119,22 +138,22 @@ class CmdLine(cmd.Cmd):
 
 		if s == '':
 			print red('You have to specify what direction to move!')
-		elif s.lower() == 'north':
+		elif s.lower() == 'north' or s.lower() == 'n':
 			if cur_room.north:
 				self.player.setPos( (player_x, player_y - 1) )
 			else:
 				print red("You can't move in that direction")
-		elif s.lower() == 'south':
+		elif s.lower() == 'south' or s.lower() == 's':
 			if cur_room.south:
 				self.player.setPos( (player_x, player_y + 1) )
 			else:
 				print red("You can't move in that direction")
-		elif s.lower() == 'east':
+		elif s.lower() == 'east' or s.lower() == 'e':
 			if cur_room.east:
 				self.player.setPos( (player_x + 1, player_y) )
 			else:
 				print red("You can't move in that direction")
-		elif s.lower() == 'west':
+		elif s.lower() == 'west' or s.lower() == 'w':
 			if cur_room.west:
 				self.player.setPost( (player_x - 1, player_y) )
 			else:

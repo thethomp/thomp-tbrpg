@@ -2,11 +2,11 @@
 1. Implement shortcuts for commands (e.g. look = l)
 
 Commands to implement:
-	examine
-	take
+DONE	examine
+DONE	take
 	equip
 	put
-	drop
+DONE	drop
 	search, forage, gather
 	use (potion, apply enchantment, eat food)
 	stats
@@ -15,13 +15,16 @@ Commands to implement:
 	pick (lock)
 
 -- Major Mechanics --
-1. Inventory system
-2. Interactable items (chests, keys/doors, etc)
+DONE 1. Inventory system
+DONE 2. Interactable items (chests, keys/doors, etc)
 3. NPC Dialogue exchange
 4. Combat
 
 
 -- Tackling Next --
-** Inventory System
-	* Highlight items that can be examined or picked up in the 'look' text.
-	* Create key and door that can't be opened without the key to exemplify interactable objects.
+DONE ** Inventory System
+DONE 	* Highlight items that can be examined or picked up in the 'look' text.
+DONE	* Create key and door that can't be opened without the key to exemplify interactable objects.
+** Combat!!
+	* Implement stats. Strength, Intellect, to start.
+	* Create items to equip. Staff and a sword?

@@ -18,7 +18,7 @@ items:
   map_side_to_change: None
   examine_text: A disgusting body, half decomposed, other half burned. Through the burnt flesh, you notice a nest of maggots festering within the guard's chest cavity. There seems to be a <i>glimmer<i> of something in the heart of the nest.
 - name: Key
-  keyword: ['take', 'use']
+  keyword: ['take']
   unlock_item: []
   item_list: []
   map_side_to_change: None

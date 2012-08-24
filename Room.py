@@ -13,6 +13,29 @@ class Room(object):
 		self.east = None
 		self.west = None
 		self.items = []
+		self.dropped_items = []
+
+	def getNorth(self):
+		return self.north
+
+	def getSouth(self):
+		return self.south
+
+	def getWest(self):
+		return self.west
+
+	def getEast(self):
+		return self.east
+
+	def getDescriptionByName(self, str):
+		if str == 'north':
+			return self.north
+		elif str == 'south':
+			return self.south
+		elif str == 'west':
+			return self.west
+		elif str == 'east':
+			return self.east
 
 	def setDescription(self, desc):
 		self.description = desc
@@ -63,5 +86,9 @@ class Room(object):
 		else:
 			return True
 
+	def getDroppedItems(self):
+		return self.dropped_items
 
+	def addToDroppedItems(self, item):
+		self.dropped_items.append(item)
 
