@@ -1,15 +1,46 @@
 ---
 x: 5
 y: 5
-description: You look around, seeing that you're in a dank, nasty jail cell.
-look_north: An empty corner of your cell glares at you.
-look_south: An empty corner of your cell glares at you.
-look_east: An empty corner of your cell glares at you.
-look_west: An empty corner of your cell glares at you.
-north: True
+description: You look around, seeing that you're in a dank, nasty jail cell. 
+look_north: Laying along the outside of your cell, you see an unconscious <i>guard<i> on the ground.
+look_south: An empty corner of your cell glares at you. You're not going to get out this way.
+look_east: An iron <i>door<i> keeps you caged in your cell.
+look_west: An empty corner of your cell glares at you. You're not going to get out this way.
+north: False
 south: False
 east: False
 west: False
+items: 
+- name: Guard
+  keyword: []
+  unlock_item: []
+  item_list: ['Key']
+  map_side_to_change: None
+  examine_text: A disgusting body, half decomposed, other half burned. Through the burnt flesh, you notice a nest of maggots festering within the guard's chest cavity. There seems to be a <i>glimmer<i> of something in the heart of the nest.
+- name: Key
+  keyword: ['take', 'use']
+  unlock_item: []
+  item_list: []
+  map_side_to_change: None
+  examine_text: A slimy, rusty, key.
+- name: Door
+  keyword: []
+  unlock_item: []
+  item_list: ['Lock']
+  map_side_to_change : None
+  examine_text: A rusty, iron cell door with vertical bars, and a <i>lock<i>. 
+- name: Lock
+  keyword: ['use']
+  unlock_item: ['Key']
+  item_list: []
+  map_side_to_change: north
+  examine_text: An iron lock on an iron door.
+- name: Glimmer
+  keyword: []
+  unlock_item: []
+  item_list: []
+  map_side_to_change: None
+  examine_text: You take a closer look and realize that it's the <i>key<i> glimmering within the wriggling maggots!
 ---
 x: 5
 y: 4
@@ -22,6 +53,7 @@ north: True
 south: True
 east: False
 west: False
+items: []
 ---
 x: 5
 y: 3
@@ -34,3 +66,4 @@ north: False
 south: True
 east: False
 west: False
+items: []

@@ -1,53 +1,16 @@
-import cmd, pickle, os
+import cmd, pickle, os, readline, string
 from colorama import *
 from Parser import *
 from Player import *
 from Map import *
 from Room import *
-
+from TextUtilities import red, red_bg, green, green_bg, magenta, magenta_bg, yellow, yellow_bg, cyan, cyan_bg, white_bg
 
 """
 General notes ---
 save format - [player,map]
 
 """
-
-#######################
-# Utility methods
-#######################
-
-def red( txt ):
-	return Fore.RED + txt + Fore.RESET
-
-def red_bg( txt ):
-	return Back.RED + txt + Back.RESET
-
-def green( txt ):
-	return Fore.GREEN + txt + Fore.RESET
-
-def green_bg( txt ):
-	return Back.GREEN + txt + Back.RESET
-
-def magenta( txt ):
-	return Fore.MAGENTA + txt + Fore.RESET	
-
-def magenta_bg( txt ):
-	return Back.MAGENTA + txt + Back.RESET	
-
-def yellow( txt ):
-	return Fore.YELLOW + txt + Fore.RESET
-
-def yellow_bg( txt ):
-	return Back.YELLOW + txt + Back.RESET
-
-def cyan( txt ):
-	return Fore.CYAN + txt + Fore.RESET
-
-def cyan_bg( txt ):
-	return Back.CYAN + txt + Back.RESET
-
-def white_bg( txt ):
-	return Back.WHITE + txt + Back.RESET
 
 ##########################
 # Command line class
@@ -62,11 +25,10 @@ class CmdLine(cmd.Cmd):
 	player = None
 	inCombat = False	
 
-	"""
-	Command Line system methods
-	"""
-	#def preloop(self):
-	#	print 'Hello'
+	#####################
+	# Command Line system methods
+	######################
+
 	def do_launch(self, s):
 		print cyan('Welcome ') +  yellow('to') + magenta(" Thomp's") + green(" Text Based") + red(" RPG!")
 		print "(1) New Game"
@@ -87,16 +49,64 @@ class CmdLine(cmd.Cmd):
 	# Action methods
 	######################
 
+	def do_use( self, s ):
+		if len(s.split()) < 3:
+			print "USE syntax: use <item1> on <item2>"
+			return
+		cur_room = self.map.getRooms()[self.player.getPos()]
+		room_items = cur_room.getItems()
+		string1 = s.split()[0]
+		string2 = s.split()[2]
+		playeritem = self.player.getInventoryItemByName(string1)
+		roomitem = cur_room.getItemByName(string2)
+		if string.lower(playeritem.getName()) in roomitem.getUnlockItems():
+			cur_room.modifyDirectionalBoundary(roomitem.getDirectionToChange())
+			print 'You used ' + yellow(string1) + ' on ' + yellow(string2) + '.'
+			print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has opened!'
+		else:
+			print "You can't use " + yellow(string1) + ' on ' + yellow(string2) + '!'
+
+	def do_take( self, s ):
+		cur_room = self.map.getRooms()[self.player.getPos()]
+		for item in cur_room.getItems():
+			if string.lower(item.getName()) == string.lower(s):
+				if 'take' in item.getKeywords():
+					print yellow(item.getName()) + ' added to your' + magenta(' inventory')
+					self.player.addToInventory(item)
+					cur_room.getItems().remove(item)
+					return		
+				else:
+					print red("You can't take that.")
+					return		
+		print "You don't see anything that looks like a " + yellow(s) + '.' 
+
+	def do_examine( self, s ):
+		cur_room = self.map.getRooms()[self.player.getPos()]
+		for item in cur_room.getItems():
+			if string.lower(item.getName()) == string.lower(s):
+				print self.parser.parseDescription(item.getExamineText())
+				return
+		print "You don't see anything that looks like a " + yellow(s) + '.'
+
+	def do_inventory( self, s ):
+		inv = self.player.getInventory()
+		print magenta('=== INVENTORY ===')
+		for item in inv:
+			print magenta(item.getName())
+		print magenta('=================')
+
 	def do_look(self, s):
 		cur_room = self.map.getRooms()[self.player.getPos()]
 		if s == '':
 			print magenta(cur_room.description)
 		elif s.lower() == 'north':
-			print magenta(cur_room.north_desc)
+			print self.parser.parseDescription(cur_room.north_desc)
+			#print magenta(cur_room.north_desc)
 		elif s.lower() == 'south':
 			print magenta(cur_room.south_desc)
 		elif s.lower() == 'east':
-			print magenta(cur_room.east_desc)
+			print self.parser.parseDescription(cur_room.east_desc)
+			#print magenta(cur_room.east_desc)
 		elif s.lower() == 'west':
 			print magenta(cur_room.west_desc)
 		else:

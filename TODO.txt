@@ -21,7 +21,7 @@ Commands to implement:
 4. Combat
 
 
-Tackling Next:
+-- Tackling Next --
 ** Inventory System
 	* Highlight items that can be examined or picked up in the 'look' text.
 	* Create key and door that can't be opened without the key to exemplify interactable objects.
