@@ -1,9 +1,11 @@
 import cmd, pickle, os, readline, string
+from CombatCmdLine import *
 from colorama import *
 from Parser import *
 from Player import *
 from Map import *
 from Room import *
+from Enemy import *
 from TextUtilities import red, red_bg, green, green_bg, magenta, magenta_bg, yellow, yellow_bg, cyan, cyan_bg, white_bg, bright
 
 """
@@ -23,7 +25,8 @@ class CmdLine(cmd.Cmd):
 	prompt = Fore.RED + 'TBRPG>> ' + Fore.RESET
 	parser = Parser()
 	player = None
-	inCombat = False	
+	inCombat = False
+#	combatCmd = CombatCmdLine()
 
 	#####################
 	# Command Line system methods
@@ -47,6 +50,11 @@ class CmdLine(cmd.Cmd):
 	######################
 	# Action methods
 	######################
+
+	def do_attack( self, s ):
+		enemy = Enemy()
+		i = CombatCmdLine(enemy)
+		i.cmdloop()
 
 	def do_drop( self , s ):
 		cur_room = self.map.getRooms()[self.player.getPos()]
@@ -200,9 +208,6 @@ class CmdLine(cmd.Cmd):
 	def do_quit(self,s):
 		return True
 
-	def do_attack(self, s):
-		print self.parser.parse(s)
-
 	########################
 	# Help methods
 	########################
@@ -236,4 +241,5 @@ class CmdLine(cmd.Cmd):
 	def help_quit(self):
 		print 'Exit Game'
 		print red('WARNING - Any unsaved changes will be lost.')
+
 
