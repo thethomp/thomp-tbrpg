@@ -22,7 +22,8 @@ save format - [player,map]
 class CmdLine(cmd.Cmd):
 
 	map = None
-	prompt = Fore.RED + 'TBRPG>> ' + Fore.RESET
+	#prompt = Fore.RED + 'TBRPG>> ' + Fore.RESET
+	prompt = 'TBRPG>> '
 	parser = Parser()
 	player = None
 	inCombat = False
@@ -61,6 +62,14 @@ class CmdLine(cmd.Cmd):
 			else:
 				print yellow(s) + ' equipped!'
 				self.player.equipItem(item)
+
+	def do_unequip( self, s ):
+		item = self.player.getEquippedItemByName(s)
+		if item == None:
+			print "You don't have anything by that name equipped"
+		else:
+			self.player.unequipItem(item)
+			print yellow(s) + " unequipped and put into your " + magenta('Inventory') + '.'
 
 	def do_attack( self, s ):
 		enemy = Enemy()
@@ -127,6 +136,10 @@ class CmdLine(cmd.Cmd):
 		for item in inv:
 			print yellow(item.getName())
 		print magenta('=================')
+		print magenta('=== EQUIPPED ===')
+		for item in  self.player.getEquipped():
+			print yellow(item.getName())
+		print magenta('================')
 
 	def do_look(self, s):
 		cur_room = self.map.getRooms()[self.player.getPos()]
@@ -218,8 +231,15 @@ class CmdLine(cmd.Cmd):
 	def do_exit(self, s):
 		return True
 
+    ###################
+	# Alternative commands
+	###################
+
+	def do_inv(self, s):
+		return self.do_inventory(s)
+
 	def do_quit(self,s):
-		return True
+		return self.do_exit(s)	
 
 	########################
 	# Help methods

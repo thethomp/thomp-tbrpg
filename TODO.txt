@@ -28,6 +28,6 @@ DONE	* Create key and door that can't be opened without the key to exemplify int
 ** Combat!!
 DONE	* Implement stats. Strength, Intellect, to start.
 DONE	* Create items to equip. Staff and a sword?
-	* Show equipped items when looking at inventory.
-	* Add shortened version of inventory - inv.
-	* Add unequip command. 
+DONE	* Show equipped items when looking at inventory.
+DONE	* Add shortened version of inventory - inv.
+DONE	* Add unequip command. 
