@@ -55,6 +55,7 @@ items:
   equippable: True
   strength: 0
   intellect: 2
+enemies: [1]
 ---
 x: 5
 y: 4
@@ -68,6 +69,7 @@ south: True
 east: False
 west: False
 items: []
+enemies: []
 ---
 x: 5
 y: 3
@@ -81,3 +83,4 @@ south: True
 east: False
 west: False
 items: []
+enemies: [1]

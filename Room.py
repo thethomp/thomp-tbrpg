@@ -14,6 +14,7 @@ class Room(object):
 		self.west = None
 		self.items = []
 		self.dropped_items = []
+		self.enemies = []
 
 	def getNorth(self):
 		return self.north
@@ -91,4 +92,14 @@ class Room(object):
 
 	def addToDroppedItems(self, item):
 		self.dropped_items.append(item)
+
+	def setEnemies(self, e):
+		self.enemies = e
+
+	def getEnemies(self):
+		return self.enemies
+
+	def setEnemies(self, e):
+		self.enemies = e
+
 

@@ -1,5 +1,7 @@
 import yaml
 from Room import *
+from Ability import *
+from Enemy import *
 from InteractiveObject import *
 
 class Map(object):
@@ -7,7 +9,24 @@ class Map(object):
 	def __init__(self):
 		yaml_path = 'config/map.yaml'
 		self.rooms = {}
+		self.abilities = []
+		self.enemies = {}
 		room_data = yaml.load_all( open(yaml_path, 'r') )
+	
+		### Load enemy data
+		enemy_yaml = 'config/enemies.yaml'
+		enemy_data = yaml.load_all( open(enemy_yaml, 'r') )
+		for e in enemy_data:
+			new_e = Enemy()
+			id = e['id']
+			new_e.setName(e['name'])
+			new_e.setHP(e['hp'])	
+			new_e.setMP(e['mp'])
+			self.enemies[id] = new_e
+		
+	
+		### Load map data
+		print "Loading map file..."
 		for d in room_data:
 			newroom = Room()
 			newroom.setDescription(d['description'])
@@ -31,6 +50,26 @@ class Map(object):
 					new_obj.setIntellect(item['intellect'])
 				room_items.append(new_obj)		
 			newroom.setItems(room_items)
+			newroom.setEnemies(d['enemies'])
+		print "Map file loaded!"
+	
+		### Load ability data	
+		ability_yaml_path = 'config/abilities.yaml'
+		ability_data = yaml.load_all( open(ability_yaml_path, 'r') )
+		for a in ability_data:
+			new_a = Ability()
+			new_a.setName(a['name'])
+			new_a.setLevelReq(a['level_req'])
+			new_a.setDamage(a['damage'])
+			new_a.setForPlayer(a['for_player'])
+			self.abilities.append(new_a)
+		
 
 	def getRooms(self):
 		return self.rooms
+
+	def getAbilities(self):
+		return self.abilities
+
+	def getEnemies(self):
+		return self.enemies

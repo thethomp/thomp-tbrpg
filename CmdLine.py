@@ -235,6 +235,21 @@ class CmdLine(cmd.Cmd):
 	# Alternative commands
 	###################
 
+	def do_ueq(self, s):
+		return self.do_unequip(s)
+
+	def do_eq(self, s):
+		return self.do_equip(s)
+
+	def do_e(self, s):
+		return self.do_examine(s)
+
+	def do_m(self, s):
+		return self.do_move(s)
+
+	def do_l(self, s):
+		return self.do_look(s)
+
 	def do_inv(self, s):
 		return self.do_inventory(s)
 
@@ -274,5 +289,17 @@ class CmdLine(cmd.Cmd):
 	def help_quit(self):
 		print 'Exit Game'
 		print red('WARNING - Any unsaved changes will be lost.')
+
+	######################
+	# Debugging commands
+	#######################
+
+	def do_enemies(self, s):
+		cur_room = self.map.getRooms()[self.player.getPos()]
+		global_enemy_defs = self.map.getEnemies()
+		enemies = cur_room.getEnemies()
+		for id in enemies:
+			print global_enemy_defs[id].getName()
+
 
 

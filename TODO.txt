@@ -8,8 +8,9 @@ DONE	take
 	put
 DONE	drop
 	search, forage, gather
+	eat
 	use (potion, apply enchantment, eat food)
-	stats
+DONE	stats
 	abilities
 	interact
 	pick (lock)
@@ -25,9 +26,24 @@ DONE 2. Interactable items (chests, keys/doors, etc)
 DONE ** Inventory System
 DONE 	* Highlight items that can be examined or picked up in the 'look' text.
 DONE	* Create key and door that can't be opened without the key to exemplify interactable objects.
-** Combat!!
 DONE	* Implement stats. Strength, Intellect, to start.
 DONE	* Create items to equip. Staff and a sword?
 DONE	* Show equipped items when looking at inventory.
 DONE	* Add shortened version of inventory - inv.
 DONE	* Add unequip command. 
+
+** Combat!!
+	* Player has list of abilities kept in YAML file.
+		* Each ability has a level requirement and a flag for if it's unlocked or not.
+	* Combat mode will allow the player to type in what ability they want to use (via the 'use' command).
+	* 'abilities' command will list the abilities that the player has unlocked and what they do.
+	* After an ability is triggered by player, roll is done, and enemy will (for the time being, randomly) choose an ability to attack with.
+	* Each enemy will be defined in the YAML config with starting HP, MP, and ability list.
+	* Each ability will be defined in YAML, with level requirement, damage, unlock flag.
+	* Create Ability.py class to hold ability specifics.
+		* Name
+		* Level Req
+		* Player unlocked flag
+		* Damage
+
+* Implement experience gain, levels, leveling up, etc.	
