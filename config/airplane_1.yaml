@@ -1,0 +1,49 @@
+---
+x: 5
+y: 9
+description: "You look around, seeing that you're in a tiny airplane restroom vestibule. You feel an unusual amount of turbulence." 
+look_north: In the standard airplane restroom manner, a <i>latch<i> keeps the door locked while you occupy it.
+look_south: Water sloshes around in the small sink.
+look_east: A toilet, with the lid shut, emits a nasty stench.
+look_west: Some paper towels hang out of the repository.
+north: False
+south: False
+east: False
+west: False
+items: 
+- name: Latch
+  keyword: ['open']
+  unlock_item: []
+  item_list: []
+  map_side_to_change: north
+  examine_text: A standard airplane restroom door <i>latch<i>, indicating to outsiders whether the room is occupied or not.
+  equippable: False
+enemies: []
+---
+x: 5
+y: 8
+description: . 
+look_north: An empty corner of your cell glares at you.
+look_south: The small restroom vestibule door sits ajar.
+look_east: An empty corner of your cell glares at you.
+look_west: An empty corner of your cell glares at you.
+north: True
+south: True
+east: False
+west: False
+items: []
+enemies: []
+---
+x: 5
+y: 3
+description: Third room of the prison. 
+look_north: An empty corner of your cell glares at you.
+look_south: An empty corner of your cell glares at you.
+look_east: An empty corner of your cell glares at you.
+look_west: An empty corner of your cell glares at you.
+north: False
+south: True
+east: False
+west: False
+items: []
+enemies: [1]
