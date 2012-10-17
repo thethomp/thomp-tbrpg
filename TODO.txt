@@ -1,5 +1,8 @@
 -- Command Line Parser --
-1. Implement shortcuts for commands (e.g. look = l)
+DONE Implement shortcuts for commands (e.g. look = l)
+Make the move command trigger a specific description depending on where the player is moving from.
+	e.g. move north = You look down the aisle of seats.
+		 move south = You reach the back of the plane. 
 
 Commands to implement:
 DONE	examine

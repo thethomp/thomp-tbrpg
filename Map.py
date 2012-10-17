@@ -7,7 +7,7 @@ from InteractiveObject import *
 class Map(object):
 	
 	def __init__(self):
-		yaml_path = 'config/airplane_1.yaml'
+		yaml_path = 'config/airplane_1_alpha.yaml'
 		self.rooms = {}
 		self.abilities = []
 		self.enemies = {}

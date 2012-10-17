@@ -155,10 +155,10 @@ class CmdLine(cmd.Cmd):
 		for item in inv:
 			print yellow(item.getName())
 		print magenta('=================')
-		print magenta('=== EQUIPPED ===')
+		print magenta('=== EQUIPPED  ===')
 		for item in  self.player.getEquipped():
 			print yellow(item.getName())
-		print magenta('================')
+		print magenta('=================')
 
 	def do_look(self, s):
 		cur_room = self.map.getRooms()[self.player.getPos()]
@@ -188,24 +188,28 @@ class CmdLine(cmd.Cmd):
 
 		if s == '':
 			print red('You have to specify what direction to move!')
-		elif s.lower() == 'north' or s.lower() == 'n':
+		elif s.lower() == 'north' or s.lower() == 'n' or s.lower() == 'forward' or s.lower() == 'f':
 			if cur_room.north:
 				self.player.setPos( (player_x, player_y - 1) )
+				self.do_look('')
 			else:
 				print red("You can't move in that direction")
-		elif s.lower() == 'south' or s.lower() == 's':
+		elif s.lower() == 'south' or s.lower() == 's' or s.lower() == 'back' or s.lower() == 'b':
 			if cur_room.south:
 				self.player.setPos( (player_x, player_y + 1) )
+				self.do_look('')
 			else:
 				print red("You can't move in that direction")
-		elif s.lower() == 'east' or s.lower() == 'e':
+		elif s.lower() == 'east' or s.lower() == 'e' or s.lower() == 'right' or s.lower() == 'r':
 			if cur_room.east:
 				self.player.setPos( (player_x + 1, player_y) )
+				self.do_look('')
 			else:
 				print red("You can't move in that direction")
-		elif s.lower() == 'west' or s.lower() == 'w':
+		elif s.lower() == 'west' or s.lower() == 'w' or s.lower() == 'left' or s.lower() == 'l':
 			if cur_room.west:
-				self.player.setPost( (player_x - 1, player_y) )
+				self.player.setPos( (player_x - 1, player_y) )
+				self.do_look('')
 			else:
 				print red("You can't move in that direction")
 		else:
@@ -245,7 +249,8 @@ class CmdLine(cmd.Cmd):
 		print 'Starting new game...'
 		self.map = Map()
 		self.player = Player()
-		self.player.setPos((5,9))
+		self.player.setPos((6,10))
+		self.do_look('')
 
 	def do_exit(self, s):
 		return True

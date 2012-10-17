@@ -1,0 +1,210 @@
+---
+x: 6
+y: 10
+description: "You startle yourself to an awakened state, realizing that you're sitting in an airplane restroom. What happened?! Why are you sleeping in this dank, disgusting little room? You hear the low buzz of the airplane through the door. Time to figure out what the hell is going on..."
+look_north: Water sloshes in a small sink.
+look_south: Some paper towels hang out of the repository.
+look_east: The small airplane toilet emits a nasty stench that resembles a freshly made chemical-feces milkshake. Yuck.
+look_west: The restroom <i>door<i> is latched closed, indicating the stall is occupied.
+north: False
+south: False
+east: False
+west: False
+items:
+- name: Door
+  keyword: ['open']
+  unlock_item: []
+  item_list: []
+  map_side_to_change: west
+  examine_text: A standard airplane bathroom <i>door<i>.
+  equippable: False
+enemies: []
+---
+x: 5
+y: 10
+description: You walk into the airplane aisle and look down the rows of seats in the aircraft. 
+look_north: You look down the rows of seats, toward the front of the plane.
+look_south: You see cabinets ajar, with packaged food within, and on the floor.
+look_east: You left the bathroom door open, with the gross stench flowing freely into your face.
+look_west: "Another restroom, with the door closed. It doesn't appear you can get in there."
+north: True
+south: False
+east: True
+west: False
+items: []
+enemies: []
+---
+x: 5
+y: 9
+description: "You take a step down the aisle. The plane is about half full. Everyone is asleep, or passed out, or something... They're silent for whatever reason."
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: True
+south: True
+east: False
+west: False
+items: []
+enemies: []
+---
+x: 5
+y: 8
+description: "You take another step down the aisle. A fat slob sits to your right, taking up all 3 seats."
+look_north: FILLER
+look_south: FILLER
+look_east: "You spot a bottle of <i>water underneath one of the rolls of fat of the man, just out of your reach. That might be useful for later..."
+look_west: FILLER
+north: True
+south: True
+east: True
+west: False
+items: []
+enemies: []
+---
+x: 6
+y: 8
+description: "You squeeze past fatty, and now stand upon him. You can reach the bottle of <i>water now."
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: False
+south: False
+east: False
+west: True
+items:
+- name: Water
+  keyword: ['take']
+  unlock_item: []
+  item_list: []
+  map_side_to_change: None
+  examine_text: An unopened bottle of <i>water<i>, wedged under a very fat man.
+  equippable: False
+enemies: []
+---
+x: 5
+y: 7
+description: "You take another step forward, unconsious people on either side of you."
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: True
+south: True
+east: False
+west: False
+items: []
+enemies: []
+---
+x: 4
+y: 6
+description: TEMPORARY DESC
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: False
+south: False
+east: True
+west: False
+items: []
+enemies: []
+---
+x: 5
+y: 6
+description: TEMPORARY DESC
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: True
+south: True
+east: True
+west: True
+items: []
+enemies: []
+---
+x: 6
+y: 6
+description: TEMPORARY DESC
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: False
+south: False
+east: False
+west: True
+items: []
+enemies: []
+---
+x: 5
+y: 5
+description: TEMPORARY DESC
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: True
+south: True
+east: False
+west: False
+items: []
+enemies: []
+---
+x: 4
+y: 4
+description: TEMPORARY DESC
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: False
+south: False
+east: True
+west: False
+items: []
+enemies: []
+---
+x: 4
+y: 5
+description: TEMPORARY DESC
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: True
+south: True
+east: False
+west: True
+items: []
+enemies: []
+---
+x: 3
+y: 5
+description: TEMPORARY DESC
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: True
+south: True
+east: False
+west: False
+items: []
+enemies: []
+---
+x: 2
+y: 5
+description: TEMPORARY DESC
+look_north: FILLER
+look_south: FILLER
+look_east: FILLER
+look_west: FILLER
+north: True
+south: True
+east: False
+west: False
+items: []
+enemies: []
