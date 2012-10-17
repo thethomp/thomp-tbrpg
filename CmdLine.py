@@ -86,6 +86,25 @@ class CmdLine(cmd.Cmd):
 			self.player.getInventory().remove(itemtodrop)
 			print self.parser.parseDescription("You dropped <i>" + s + '.')	
 
+	def do_open( self, s ):
+		cur_room = self.map.getRooms()[self.player.getPos()]
+		open_item = s.strip()
+		roomitem = cur_room.getItemByName(open_item)
+		if roomitem == None:
+			print yellow(open_item) + ' could not be found!'
+			return
+		else:
+			if 'open' in roomitem.getKeywords():
+				cur_room.modifyDirectionalBoundary(roomitem.getDirectionToChange())
+				print 'You opened ' + yellow(open_item) + '.'
+				if cur_room.getDirectionByName(roomitem.getDirectionToChange()):
+					print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has opened!'
+				else:
+					print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has closed!'
+			else:
+				print "You can't open " + yellow(open_item) + '!'
+			
+
 	def do_use( self, s ):
 		if len(s.split()) < 3:
 			print self.parser.parseDescription("USE syntax: use <i><item1> on <i><item2>")
@@ -226,7 +245,7 @@ class CmdLine(cmd.Cmd):
 		print 'Starting new game...'
 		self.map = Map()
 		self.player = Player()
-		self.player.setPos((5,5))
+		self.player.setPos((5,9))
 
 	def do_exit(self, s):
 		return True
