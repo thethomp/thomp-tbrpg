@@ -5,8 +5,10 @@ class InteractiveObject(object):
 	def __init__(self):
 		self.name = ''
 		self.items = []
+		self.droppable_items = []
 		self.map_side_to_change = None
 		self.unlock_items = []
+		self.unlock_text = ''
 		self.keywords = []
 		self.examine_text = ''
 		self.equippable = None
@@ -26,7 +28,8 @@ class InteractiveObject(object):
 		return self.name
 
 	def setDirectionToChange(self, dir):
-		self.map_side_to_change = dir
+		if dir is not None:
+			self.map_side_to_change = dir
 
 	def getDirectionToChange(self):
 		return self.map_side_to_change
@@ -43,6 +46,12 @@ class InteractiveObject(object):
 	def setUnlockItems(self, items):
 		for i in items:
 			self.unlock_items.append(string.lower(i))
+
+	def getUnlockText(self):
+		return self.unlock_text
+
+	def setUnlockText(self, text):
+		self.unlock_text = text
 
 	def setExamineText(self, text):
 		self.examine_text = text
@@ -67,3 +76,10 @@ class InteractiveObject(object):
 
 	def setIntellect(self, num):
 		self.intellect = num
+
+	def getDroppableItems(self):
+		return self.droppable_items
+
+	def setDroppableItems(self, items):
+		self.droppable_items = items
+

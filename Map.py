@@ -41,6 +41,8 @@ class Map(object):
 				new_obj.setName(item['name'])
 				new_obj.setItems(item['item_list'])
 				new_obj.setUnlockItems(item['unlock_item'])
+				if len(new_obj.getUnlockItems()) > 0:
+					new_obj.setUnlockText(item['unlock_text'])
 				new_obj.setKeywords(item['keyword'])
 				new_obj.setDirectionToChange(item['map_side_to_change'])
 				new_obj.setExamineText(item['examine_text'])
@@ -48,6 +50,24 @@ class Map(object):
 				if new_obj.getEquippable():
 					new_obj.setStrength(item['strength'])
 					new_obj.setIntellect(item['intellect'])
+				## Droppable items, if any
+				d_items = []
+				for d_item in item['droppable_items']:
+					d_obj = InteractiveObject()
+					d_obj.setName(d_item['name'])
+					d_obj.setItems(d_item['item_list'])
+					d_obj.setUnlockItems(d_item['unlock_item'])
+					if len(d_obj.getUnlockItems()) > 0:
+						d_obj.setUnlockText(d_item['unlock_text'])
+					d_obj.setKeywords(d_item['keyword'])
+					d_obj.setDirectionToChange(d_item['map_side_to_change'])
+					d_obj.setExamineText(d_item['examine_text'])
+					d_obj.setEquippable(d_item['equippable'])
+					if d_obj.getEquippable():
+						d_obj.setStrength(d_item['strength'])
+						d_obj.setIntellect(d_item['intellect'])
+					d_items.append(d_obj)
+				new_obj.setDroppableItems(d_items)
 				room_items.append(new_obj)		
 			newroom.setItems(room_items)
 			newroom.setEnemies(d['enemies'])

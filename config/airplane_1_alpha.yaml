@@ -18,6 +18,7 @@ items:
   map_side_to_change: west
   examine_text: A standard airplane bathroom <i>door<i>.
   equippable: False
+  droppable_items: []
 enemies: []
 ---
 x: 5
@@ -81,11 +82,12 @@ items:
   map_side_to_change: None
   examine_text: An unopened bottle of <i>water<i>, wedged under a very fat man.
   equippable: False
+  droppable_items: []
 enemies: []
 ---
 x: 5
 y: 7
-description: "You take another step forward, unconsious people on either side of you."
+description: "You take another step forward, there are unconsious people on either side of you."
 look_north: FILLER
 look_south: FILLER
 look_east: FILLER
@@ -99,7 +101,7 @@ enemies: []
 ---
 x: 4
 y: 6
-description: TEMPORARY DESC
+description: "There's an emergency exit <i>hatch here."
 look_north: FILLER
 look_south: FILLER
 look_east: FILLER
@@ -108,12 +110,20 @@ north: False
 south: False
 east: True
 west: False
-items: []
+items:
+- name: Hatch
+  keyword: ['open']
+  unlock_item: []
+  item_list: []
+  map_side_to_change: east
+  examine_text: A hatch that one can open to exit the plane.
+  equippable: False
+  droppable_items: []
 enemies: []
 ---
 x: 5
 y: 6
-description: TEMPORARY DESC
+description: You step into the exit row.
 look_north: FILLER
 look_south: FILLER
 look_east: FILLER
@@ -127,7 +137,7 @@ enemies: []
 ---
 x: 6
 y: 6
-description: TEMPORARY DESC
+description: "There's an emergency exit <i>hatch here."
 look_north: FILLER
 look_south: FILLER
 look_east: FILLER
@@ -136,12 +146,20 @@ north: False
 south: False
 east: False
 west: True
-items: []
+items:
+- name: Hatch
+  keyword: ['open']
+  unlock_item: []
+  item_list: []
+  map_side_to_change: east
+  examine_text: A hatch that one can open to exit the plane.
+  equippable: False
+  droppable_items: []
 enemies: []
 ---
 x: 5
 y: 5
-description: TEMPORARY DESC
+description: You near the front of the plane, just a few more rows in front of you.
 look_north: FILLER
 look_south: FILLER
 look_east: FILLER
@@ -155,8 +173,8 @@ enemies: []
 ---
 x: 4
 y: 4
-description: TEMPORARY DESC
-look_north: FILLER
+description: A badge glimmers on the seat, it appears that this man was an Air Marshal. 
+look_north: A <i>key lies under the seat in front of the man.
 look_south: FILLER
 look_east: FILLER
 look_west: FILLER
@@ -164,16 +182,24 @@ north: False
 south: False
 east: True
 west: False
-items: []
+items: 
+- name: Key
+  keyword: ['take']
+  unlock_item: []
+  item_list: []
+  map_side_to_change: None
+  examine_text: A small key that appears to go to a door of some kind.
+  equippable: False
+  droppable_items: []
 enemies: []
 ---
-x: 4
-y: 5
-description: TEMPORARY DESC
+x: 5
+y: 4
+description: Luggage fills the seats to your right, you see a glimmer of light to your left.
 look_north: FILLER
 look_south: FILLER
 look_east: FILLER
-look_west: FILLER
+look_west: It looks like someone of interest was sitting in this seat, there are several items of interest strewn about.
 north: True
 south: True
 east: False
@@ -181,24 +207,33 @@ west: True
 items: []
 enemies: []
 ---
-x: 3
-y: 5
-description: TEMPORARY DESC
-look_north: FILLER
+x: 5
+y: 3
+description: "You've reached the front of the plane."
+look_north: "The captain's cabin door is closed in front of you, locked."
 look_south: FILLER
 look_east: FILLER
 look_west: FILLER
-north: True
+north: False
 south: True
 east: False
 west: False
-items: []
+items:
+- name: Door
+  keyword: ['use']
+  unlock_item: ['key']
+  unlock_text: "The <i>door unlocks and swings ajar, allowing entry into the captain's cabin."
+  item_list: []
+  map_side_to_change: north
+  examine_text: "The door to the captain's cabin. It appears you need a key to unlock this."
+  equippable: False
+  droppable_items: []
 enemies: []
 ---
-x: 2
-y: 5
-description: TEMPORARY DESC
-look_north: FILLER
+x: 5
+y: 2
+description: "You've reached the captain's cabin!"
+look_north: "A <i>lockbox sits on the floor."
 look_south: FILLER
 look_east: FILLER
 look_west: FILLER
@@ -206,5 +241,23 @@ north: True
 south: True
 east: False
 west: False
-items: []
+items: 
+- name: Lockbox
+  keyword: ['use']
+  unlock_item: ['key']
+  unlock_text: "The lockbox opens up, exposing a <i>parachute."
+  item_list: ['Parachute']
+  map_side_to_change: None
+  examine_text: "A standard lockbox."
+  equippable: False
+  droppable_items:
+  - name: Parachute
+    keyword: ['take']
+    unlock_item: []
+    item_list: []
+    map_side_to_change: None
+    examine_text: "A parachute that looks equippable."
+    equippable: True
+    strength: 0
+    intellect: 0
 enemies: []

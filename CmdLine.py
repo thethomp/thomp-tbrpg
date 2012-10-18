@@ -118,10 +118,19 @@ class CmdLine(cmd.Cmd):
 		if string.lower(playeritem.getName()) in roomitem.getUnlockItems():
 			cur_room.modifyDirectionalBoundary(roomitem.getDirectionToChange())
 			print 'You used ' + yellow(string1) + ' on ' + yellow(string2) + '.'
-			if cur_room.getDirectionByName(roomitem.getDirectionToChange()):
-				print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has opened!'
+			if roomitem.getUnlockText() != '':
+				print self.parser.parseDescription(roomitem.getUnlockText())
 			else:
-				print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has closed!'
+				if cur_room.getDirectionByName(roomitem.getDirectionToChange()):
+					print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has opened!'
+				else:
+					print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has closed!'
+			## Check for droppable items - if present, drop them
+			if len(roomitem.getDroppableItems()) > 0:
+				for item in roomitem.getDroppableItems():
+					cur_room.addToDroppedItems(item)
+					roomitem.getDroppableItems().remove(item)
+					print yellow(roomitem.getName()) + ' dropped ' + yellow(item.getName()) + '!'	
 		else:
 			print "You can't use " + yellow(string1) + ' on ' + yellow(string2) + '!'
 
@@ -162,17 +171,18 @@ class CmdLine(cmd.Cmd):
 
 	def do_look(self, s):
 		cur_room = self.map.getRooms()[self.player.getPos()]
+		dir = s.lower()
 		if s == '':
 			print self.parser.parseDescription(cur_room.description)
-		elif s.lower() == 'north':
+		elif dir == 'north' or dir == 'n' or dir == 'forward' or dir == 'f':
 			print self.parser.parseDescription(cur_room.north_desc)
 			#print magenta(cur_room.north_desc)
-		elif s.lower() == 'south':
+		elif dir == 'south' or dir == 's' or dir == 'back' or dir == 'b':
 			print self.parser.parseDescription(cur_room.south_desc)
-		elif s.lower() == 'east':
+		elif dir == 'east' or dir == 'e' or dir == 'right' or dir == 'r':
 			print self.parser.parseDescription(cur_room.east_desc)
 			#print magenta(cur_room.east_desc)
-		elif s.lower() == 'west':
+		elif dir == 'west' or dir == 'w' or dir == 'left' or dir == 'l':
 			print self.parser.parseDescription(cur_room.west_desc)
 		else:
 			return
