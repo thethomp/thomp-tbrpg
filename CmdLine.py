@@ -114,6 +114,10 @@ class CmdLine(cmd.Cmd):
 		string1 = s.split()[0]
 		string2 = s.split()[2]
 		playeritem = self.player.getInventoryItemByName(string1)
+		## For the case where the player doens't actually have the first item
+		## e.g. use latch on door
+		if playeritem is None:
+			playeritem = cur_room.getItemByName(string1)
 		roomitem = cur_room.getItemByName(string2)
 		if string.lower(playeritem.getName()) in roomitem.getUnlockItems():
 			cur_room.modifyDirectionalBoundary(roomitem.getDirectionToChange())
@@ -203,25 +207,25 @@ class CmdLine(cmd.Cmd):
 				self.player.setPos( (player_x, player_y - 1) )
 				self.do_look('')
 			else:
-				print red("You can't move in that direction")
+				print red("You can't move in that direction.")
 		elif s.lower() == 'south' or s.lower() == 's' or s.lower() == 'back' or s.lower() == 'b':
 			if cur_room.south:
 				self.player.setPos( (player_x, player_y + 1) )
 				self.do_look('')
 			else:
-				print red("You can't move in that direction")
+				print red("You can't move in that direction.")
 		elif s.lower() == 'east' or s.lower() == 'e' or s.lower() == 'right' or s.lower() == 'r':
 			if cur_room.east:
 				self.player.setPos( (player_x + 1, player_y) )
 				self.do_look('')
 			else:
-				print red("You can't move in that direction")
+				print red("You can't move in that direction.")
 		elif s.lower() == 'west' or s.lower() == 'w' or s.lower() == 'left' or s.lower() == 'l':
 			if cur_room.west:
 				self.player.setPos( (player_x - 1, player_y) )
 				self.do_look('')
 			else:
-				print red("You can't move in that direction")
+				print red("You can't move in that direction.")
 		else:
 			return
 	
