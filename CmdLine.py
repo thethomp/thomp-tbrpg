@@ -311,10 +311,11 @@ class CmdLine(cmd.Cmd):
 	
 	def help_new(self):
 		print 'Start a new game.' 
-		print red('WARNING - You will lose any unsaved changes')
+		print red('WARNING - You will lose any unsaved changes.')
 
 	def help_load(self):
 		print 'Load a saved game file.'
+		print 'USAGE: load example_saved_game'
 
 	def help_save(self):
 		print 'Save game.'
