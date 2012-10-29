@@ -2,10 +2,11 @@
 x: 6
 y: 10
 description: "You startle yourself to an awakened state, realizing that you're sitting in an airplane restroom. What happened?! Why are you sleeping in this dank, disgusting little room? And what is that god awful stench?!? You hear the low buzz of the airplane through the door. Time to figure out what the hell is going on..."
-look_north: Water sloshes in a small sink.
-look_south: Some paper towels hang out of the repository.
-look_east: The small airplane toilet emits a nasty stench that resembles a freshly made chemical-feces milkshake. Yuck.
-look_west: The restroom <i>door<i> is <i>latched closed, indicating the stall is occupied.
+look_north: "Water sloshes in a small sink."
+look_south: "Some paper towels hang out of the repository."
+look_east: "The small airplane toilet emits a nasty stench that resembles a freshly made chemical-feces milkshake. Yuck."
+look_west: "The restroom <i>door<i> is <i>latched closed, indicating the stall is occupied."
+look_alt_west: "The restroom <i>door is open."
 north: False
 south: False
 east: False
@@ -14,10 +15,11 @@ items:
 - name: Door
   keyword: ['use']
   unlock_item: ['latch']
-  unlock_text: The <i>door swings open and a wall of  breathable air hits your face. Ahhhhhhh.
+  unlock_text: "The <i>door swings open and a wall of breathable air hits your face. Ahhhhhhh."
+  alt_text_dir: 'west'
   item_list: []
   map_side_to_change: west
-  examine_text: A standard airplane bathroom <i>door<i> with a <i>latch to lock it.
+  examine_text: "A standard airplane bathroom <i>door<i> with a <i>latch to lock it."
   equippable: False
   droppable_items: []
 - name: Latch
@@ -25,7 +27,7 @@ items:
   unlock_item: []
   item_list: []
   map_side_to_change: None
-  examine_text: A <i>latch to open the door.
+  examine_text: "A <i>latch to open the door."
   equippable: False
   droppable_items: []
 enemies: []
@@ -79,6 +81,7 @@ look_north: "Skymall! You spot some Massage Boots on the cover... Need to rememb
 look_south: "The bottle of <i>water is just reachable under a fold of fat."
 look_east: "You look out the window. Clouds. Great."
 look_west: "You see the airplane aisle that runs through the center of the aircraft."
+look_alt_south: "Fat rolls over the side of the seat."
 north: False
 south: False
 east: False
@@ -86,10 +89,11 @@ west: True
 items:
 - name: Water
   keyword: ['take']
+  alt_text_dir: 'south'
   unlock_item: []
   item_list: []
   map_side_to_change: None
-  examine_text: An unopened bottle of <i>water<i>.
+  examine_text: "An unopened bottle of <i>water<i>."
   equippable: False
   droppable_items: []
 enemies: []
@@ -183,10 +187,11 @@ enemies: []
 x: 4
 y: 4
 description: "A badge glimmers on the seat, it appears that this man was an Air Marshal. Maybe he's left some useful stuff around..." 
-look_north: "A <i>key lies under the seat in front of the man."
+look_north: "The seat backs are soaked in blood. A <i>key lies under the seat in front of the man."
 look_south: "You a mother with two small children in the seats behind you."
 look_east: "You look out across the aisle to see a set of seats filled with luggage. Where did the people go?"
 look_west: "You glance out the window, seeing nothing but a faint light behind a thick haze."
+look_alt_north: "The seat backs are soaked in blood." 
 north: False
 south: False
 east: True
@@ -196,6 +201,7 @@ items:
   keyword: ['take']
   unlock_item: []
   item_list: []
+  alt_text_dir: 'north'
   map_side_to_change: None
   examine_text: "A small key that appears to go to a door of some kind."
   equippable: False

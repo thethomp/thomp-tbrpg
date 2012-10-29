@@ -14,6 +14,8 @@ class InteractiveObject(object):
 		self.equippable = None
 		self.strength = 0
 		self.intellect = 0
+		self.alt_text_dir = None
+
 
 	def setItems(self, items):
 		self.items = items
@@ -26,6 +28,12 @@ class InteractiveObject(object):
 
 	def getName(self):
 		return self.name
+
+	def setAltDescDirection(self, dir):
+		self.alt_text_dir = dir
+
+	def getAltDescDirection(self):
+		return self.alt_text_dir
 
 	def setDirectionToChange(self, dir):
 		if dir is not None:

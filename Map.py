@@ -32,6 +32,19 @@ class Map(object):
 			newroom.setDescription(d['description'])
 			directional_descs = [d['look_north'], d['look_south'], d['look_east'], d['look_west']]
 			newroom.setDirectionalDescriptions(directional_descs)
+			## Check for alt descriptions
+			if 'look_alt_north' in d.keys():
+				newroom.setAltDesc('north', d['look_alt_north'])	
+				newroom.setAltDescBool('north', False)
+			if 'look_alt_south' in d.keys():
+				newroom.setAltDesc('south', d['look_alt_south'])	
+				newroom.setAltDescBool('south', False)	
+			if 'look_alt_east' in d.keys():
+				newroom.setAltDesc('east', d['look_alt_east'])	
+				newroom.setAltDescBool('east', False)	
+			if 'look_alt_west' in d.keys():
+				newroom.setAltDesc('west', d['look_alt_west'])	
+				newroom.setAltDescBool('west', False)
 			moves = [d['north'], d['south'], d['east'], d['west']]
 			newroom.setDirectionalMoves(moves)
 			self.rooms[(d['x'],d['y'])] = newroom
@@ -50,6 +63,9 @@ class Map(object):
 				if new_obj.getEquippable():
 					new_obj.setStrength(item['strength'])
 					new_obj.setIntellect(item['intellect'])
+				# Alt text to change
+				if 'alt_text_dir' in item.keys():
+					new_obj.setAltDescDirection(item['alt_text_dir'])	
 				## Droppable items, if any
 				d_items = []
 				for d_item in item['droppable_items']:

@@ -134,7 +134,12 @@ class CmdLine(cmd.Cmd):
 				for item in roomitem.getDroppableItems():
 					cur_room.addToDroppedItems(item)
 					roomitem.getDroppableItems().remove(item)
-					print yellow(roomitem.getName()) + ' dropped ' + yellow(item.getName()) + '!'	
+					print yellow(roomitem.getName()) + ' dropped ' + yellow(item.getName()) + '!'
+			## Check both items that were used to see if any alternate descriptions should be used
+			if playeritem.getAltDescDirection() is not None:
+				cur_room.setAltDescBool(playeritem.getAltDescDirection(), True)	
+			if roomitem.getAltDescDirection() is not None:
+				cur_room.setAltDescBool(roomitem.getAltDescDirection(), True)
 		else:
 			print "You can't use " + yellow(string1) + ' on ' + yellow(string2) + '!'
 
@@ -148,6 +153,9 @@ class CmdLine(cmd.Cmd):
 					# Either remove the item from the list of room items, or list of dropped room items
 					try: cur_room.getItems().remove(item)
 					except ValueError: cur_room.getDroppedItems().remove(item)
+					## Check both items that were used to see if any alternate descriptions should be used
+					if item.getAltDescDirection() is not None:
+						cur_room.setAltDescBool(item.getAltDescDirection(), True)	
 					return		
 				else:
 					print red("You can't take that.")
@@ -179,15 +187,27 @@ class CmdLine(cmd.Cmd):
 		if s == '':
 			print self.parser.parseDescription(cur_room.description)
 		elif dir == 'north' or dir == 'n' or dir == 'forward' or dir == 'f':
-			print self.parser.parseDescription(cur_room.north_desc)
+			if cur_room.isAltDescActive('north'):
+				print self.parser.parseDescription(cur_room.getAltDesc('north'))
+			else:
+				print self.parser.parseDescription(cur_room.north_desc)
 			#print magenta(cur_room.north_desc)
 		elif dir == 'south' or dir == 's' or dir == 'back' or dir == 'b':
-			print self.parser.parseDescription(cur_room.south_desc)
+			if cur_room.isAltDescActive('south'):
+				print self.parser.parseDescription(cur_room.getAltDesc('south'))
+			else:
+				print self.parser.parseDescription(cur_room.south_desc)
 		elif dir == 'east' or dir == 'e' or dir == 'right' or dir == 'r':
-			print self.parser.parseDescription(cur_room.east_desc)
+			if cur_room.isAltDescActive('east'):
+				print self.parser.parseDescription(cur_room.getAltDesc('east'))
+			else:
+				print self.parser.parseDescription(cur_room.east_desc)
 			#print magenta(cur_room.east_desc)
 		elif dir == 'west' or dir == 'w' or dir == 'left' or dir == 'l':
-			print self.parser.parseDescription(cur_room.west_desc)
+			if cur_room.isAltDescActive('west'):
+				print self.parser.parseDescription(cur_room.getAltDesc('west'))
+			else:
+				print self.parser.parseDescription(cur_room.west_desc)
 		else:
 			return
 		if len(cur_room.getDroppedItems()) > 0:
