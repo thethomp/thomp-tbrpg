@@ -1,9 +1,20 @@
+-- Needed for beta testing of tutorial level --
+* Polish description text.
+	-  Make sure all descriptions make sense, even after the player picks up items/advances the story.
+* Add oxygen mask to lockbox, player must equip before jumping from plane.
+* Add turbulence mechanic for when player leaves the captain's cabin.
+* Time countdown mechanic for timing the crash of the plane?
+* Implement 'pull cord' ability for parachute.
+* Implement death. This will occur if:
+	- Player doesn't jump out of plane before timer runs out.
+	- Player doesn't pull cord after allotted amount of time after jumping from plane.
+
 -- Command Line Parser --
-DONE Implement shortcuts for commands (e.g. look = l)
+DONE 	Implement shortcuts for commands (e.g. look = l)
 NOT DOING Make the move command trigger a specific description depending on where the player is moving from.
 	e.g. move north = You look down the aisle of seats.
 		 move south = You reach the back of the plane.
-Change directional look descriptions based on whether an item is present or not.
+DONE 	Change directional look descriptions based on whether an item is present or not.
 	e.g. look north = A shiny key glimmers on the ground.
 		 take key
 		 look north = The ground is barren.
@@ -11,7 +22,7 @@ Change directional look descriptions based on whether an item is present or not.
 Commands to implement:
 DONE	examine
 DONE	take
-	equip
+DONE	equip
 	put
 DONE	drop
 	search, forage, gather
