@@ -260,18 +260,27 @@ items:
 - name: Lockbox
   keyword: ['use']
   unlock_item: ['key']
-  unlock_text: "The lockbox opens up, exposing a <i>parachute."
+  unlock_text: "The lockbox opens up, spoils spill out onto the ground."
   item_list: ['Parachute']
   map_side_to_change: None
   examine_text: "A standard <i>lockbox, it appears to have a similar <i>key hole to the door."
   equippable: False
   droppable_items:
-  - name: Parachute
+  - name: "Parachute"
     keyword: ['take']
     unlock_item: []
     item_list: []
     map_side_to_change: None
     examine_text: "A <i>parachute that looks equippable."
+    equippable: True
+    strength: 0
+    intellect: 0
+  - name: "Oxygen Mask"
+    keyword: ['take']
+    unlock_item: []
+    item_list: []
+    map_side_to_change: None
+    examine_text: "A mask to breath with when oxygen is low."
     equippable: True
     strength: 0
     intellect: 0

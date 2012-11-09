@@ -2,6 +2,7 @@
 * Polish description text.
 	-  Make sure all descriptions make sense, even after the player picks up items/advances the story.
 * Add oxygen mask to lockbox, player must equip before jumping from plane.
+	- Add the capability to interact with items that are more than one word in title length.
 * Add turbulence mechanic for when player leaves the captain's cabin.
 * Time countdown mechanic for timing the crash of the plane?
 * Implement 'pull cord' ability for parachute.

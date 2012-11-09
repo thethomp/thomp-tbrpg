@@ -106,20 +106,27 @@ class CmdLine(cmd.Cmd):
 			
 
 	def do_use( self, s ):
-		if len(s.split()) < 3:
+		if 'on' not in s:
 			print self.parser.parseDescription("USE syntax: use <i><item1> on <i><item2>")
 			return
+		string1 = s.split('on')[0].strip()
+		string2 = s.split('on')[1].strip()
+		#if len(s.split()) < 3:
+		#	print self.parser.parseDescription("USE syntax: use <i><item1> on <i><item2>")
+		#	return
 		cur_room = self.map.getRooms()[self.player.getPos()]
 		room_items = cur_room.getItems()
-		string1 = s.split()[0]
-		string2 = s.split()[2]
+		#string1 = s.split()[0]
+		#string2 = s.split()[2]
 		playeritem = self.player.getInventoryItemByName(string1)
 		## For the case where the player doens't actually have the first item
 		## e.g. use latch on door
 		if playeritem is None:
 			playeritem = cur_room.getItemByName(string1)
 		roomitem = cur_room.getItemByName(string2)
-		if string.lower(playeritem.getName()) in roomitem.getUnlockItems():
+		if roomitem is None:
+			print "There's no " + yellow(string2) + " that could be found to use."
+		elif string.lower(playeritem.getName()) in roomitem.getUnlockItems():
 			cur_room.modifyDirectionalBoundary(roomitem.getDirectionToChange())
 			print 'You used ' + yellow(string1) + ' on ' + yellow(string2) + '.'
 			if roomitem.getUnlockText() != '':
@@ -133,8 +140,10 @@ class CmdLine(cmd.Cmd):
 			if len(roomitem.getDroppableItems()) > 0:
 				for item in roomitem.getDroppableItems():
 					cur_room.addToDroppedItems(item)
-					roomitem.getDroppableItems().remove(item)
+					#roomitem.getDroppableItems().remove(item)
 					print yellow(roomitem.getName()) + ' dropped ' + yellow(item.getName()) + '!'
+				## Clear out droppable items so they can't drop again
+				del roomitem.getDroppableItems()[:]
 			## Check both items that were used to see if any alternate descriptions should be used
 			if playeritem.getAltDescDirection() is not None:
 				cur_room.setAltDescBool(playeritem.getAltDescDirection(), True)	
