@@ -1,4 +1,4 @@
-import cmd, pickle, os, readline, string
+import cmd, pickle, os, readline, string, random
 from CombatCmdLine import *
 from colorama import *
 from Parser import *
@@ -19,6 +19,16 @@ save format - [player,map]
 # Holds all logic for all commands
 ##########################
 
+
+#############################
+# GLOBAL VARS
+###########################
+GLOBAL_TIME = 0
+TIME_TO_DIE = 25
+#TURBULENCE = False
+#TURBULENCE_START_TIME = 0
+#TURBULENCE_STOP_TIME = 0
+
 class CmdLine(cmd.Cmd):
 
 	map = None
@@ -27,6 +37,7 @@ class CmdLine(cmd.Cmd):
 	parser = Parser()
 	player = None
 	inCombat = False
+	
 #	combatCmd = CombatCmdLine()
 
 	#####################
@@ -106,6 +117,10 @@ class CmdLine(cmd.Cmd):
 			
 
 	def do_use( self, s ):
+		#global GLOBAL_TIME
+		#global TURBULENCE_START_TIME
+		#global TURBULENCE_STOP_TIME
+		
 		if 'on' not in s:
 			print self.parser.parseDescription("USE syntax: use <i><item1> on <i><item2>")
 			return
@@ -119,16 +134,22 @@ class CmdLine(cmd.Cmd):
 		#string1 = s.split()[0]
 		#string2 = s.split()[2]
 		playeritem = self.player.getInventoryItemByName(string1)
+		roomitem = cur_room.getItemByName(string2)
 		## For the case where the player doens't actually have the first item
 		## e.g. use latch on door
 		if playeritem is None:
 			playeritem = cur_room.getItemByName(string1)
-		roomitem = cur_room.getItemByName(string2)
-		if roomitem is None:
+		if playeritem is None:
+			print "There's no " + yellow(string1) + " that could be found to use."
+		elif roomitem is None:
 			print "There's no " + yellow(string2) + " that could be found to use."
 		elif string.lower(playeritem.getName()) in roomitem.getUnlockItems():
 			cur_room.modifyDirectionalBoundary(roomitem.getDirectionToChange())
 			print 'You used ' + yellow(string1) + ' on ' + yellow(string2) + '.'
+			### Check for lockbox opening and start the countdown to Turbulence
+		#	if string.lower(string2) == 'lockbox':
+		#		TURBULENCE_START_TIME = GLOBAL_TIME + 2
+		#		TURBULENCE_STOP_TIME = GLOBAL_TIME + 7
 			if roomitem.getUnlockText() != '':
 				print self.parser.parseDescription(roomitem.getUnlockText())
 			else:
@@ -225,9 +246,64 @@ class CmdLine(cmd.Cmd):
 				print yellow(i.getName())
 
 	def do_move(self, s):
+		global GLOBAL_TIME
+		#global TURBULENCE
+		#global TURBULENCE_START_TIME
+		#global TURBULENCE_STOP_TIME
+	
 		cur_room = self.map.getRooms()[self.player.getPos()]
 		player_x = self.player.getPos()[0]
 		player_y = self.player.getPos()[1]
+		#print 'GLOBAL_TIME = ' + str(GLOBAL_TIME)
+		#print 'TURBULENCE_START_TIME = ' + str(TURBULENCE_START_TIME)
+		#print 'TURBULENCE_STOP_TIME = ' + str(TURBULENCE_STOP_TIME)
+		#print 'TURBULENCE = ' + str(TURBULENCE)
+
+		if GLOBAL_TIME == TIME_TO_DIE:
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
+			print 'You die.'
+			return True
+
+		TURBULENCE = random.randint(1,10)
+		if TURBULENCE < 3:
+			print '#!?#?!#?!#?!#?!?#!?#?!#?!#?!?#?!#?!#?!?#!#!?#?'
+			print '#TTTTTTTTTTTTTTTT#TTTTTTTTTTTTTTTTTTTTTTTTTTT#'
+			print '?UUUUUUUUUUUUUUUUUUUUU$UUUUUUUUUUUUUUUUUUUUUU?'
+			print '#RRRR!RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR#'
+			print '?BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB?'
+			print '#UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU#UUUUUUUUU#'
+			print '?LLLLLLLLLL?LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL?'
+			print '#EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE#'
+			print '?NNNNNNNNNNNNNNNNNN?NNNNNNNNNNNNNNNNNNNNNNNNN?'
+			print '#CCCCCCCCCCCCC!CCCCCCCCCCCCCCCCCCCC#CCCCCCCCC#'
+			print '?EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE?'
+			print '#!?#?!#?!#?!#?!?#!?#?!#?!#?!?#?!#?!#?!?#!#!?#!'
+			print 'Turbulence shakes you...'
+			dirs = ['n', 's', 'e', 'w']
+			s = dirs[random.randint(0,3)]
 
 		if s == '':
 			print red('You have to specify what direction to move!')
@@ -235,24 +311,44 @@ class CmdLine(cmd.Cmd):
 			if cur_room.north:
 				self.player.setPos( (player_x, player_y - 1) )
 				self.do_look('')
+				GLOBAL_TIME += 1
+				#if GLOBAL_TIME == TURBULENCE_START_TIME:
+				#	TURBULENCE = True
+				#if GLOBAL_TIME == TURBULENCE_STOP_TIME:
+				#	TURBULENCE = False
 			else:
 				print red("You can't move in that direction.")
 		elif s.lower() == 'south' or s.lower() == 's' or s.lower() == 'back' or s.lower() == 'b':
 			if cur_room.south:
 				self.player.setPos( (player_x, player_y + 1) )
 				self.do_look('')
+				GLOBAL_TIME += 1
+				#if GLOBAL_TIME == TURBULENCE_START_TIME:
+				#	TURBULENCE = True
+				#if GLOBAL_TIME == TURBULENCE_STOP_TIME:
+				#	TURBULENCE = False
 			else:
 				print red("You can't move in that direction.")
 		elif s.lower() == 'east' or s.lower() == 'e' or s.lower() == 'right' or s.lower() == 'r':
 			if cur_room.east:
 				self.player.setPos( (player_x + 1, player_y) )
 				self.do_look('')
+				GLOBAL_TIME += 1
+				#if GLOBAL_TIME == TURBULENCE_START_TIME:
+				#	TURBULENCE = True
+				#if GLOBAL_TIME == TURBULENCE_STOP_TIME:
+				#	TURBULENCE = False
 			else:
 				print red("You can't move in that direction.")
 		elif s.lower() == 'west' or s.lower() == 'w' or s.lower() == 'left' or s.lower() == 'l':
 			if cur_room.west:
 				self.player.setPos( (player_x - 1, player_y) )
 				self.do_look('')
+				GLOBAL_TIME += 1
+				#if GLOBAL_TIME == TURBULENCE_START_TIME:
+				#	TURBULENCE = True
+				#if GLOBAL_TIME == TURBULENCE_STOP_TIME:
+				#	TURBULENCE = False
 			else:
 				print red("You can't move in that direction.")
 		else:
@@ -370,4 +466,6 @@ class CmdLine(cmd.Cmd):
 			print global_enemy_defs[id].getName()
 
 
-
+	#########################
+	# Helper methods
+	#########################

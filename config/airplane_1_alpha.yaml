@@ -252,7 +252,7 @@ look_north: "You look out the windshield of the plane... what a view... of nothi
 look_south: "The can see out the open door to the rest of the plane."
 look_east: "A <i>lockbox hangs on the wall."
 look_west: "The co-pilot's is out cold... panic starts to twinge in your stomach."
-north: True
+north: False
 south: True
 east: False
 west: False
