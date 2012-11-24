@@ -1,4 +1,4 @@
-import cmd, pickle, os, readline, string, random
+import cmd, pickle, os, readline, string, random, time
 from CombatCmdLine import *
 from colorama import *
 from Parser import *
@@ -25,6 +25,7 @@ save format - [player,map]
 ###########################
 GLOBAL_TIME = 0
 TIME_TO_DIE = 25
+OUTSIDE_PLANE = False
 #TURBULENCE = False
 #TURBULENCE_START_TIME = 0
 #TURBULENCE_STOP_TIME = 0
@@ -108,10 +109,12 @@ class CmdLine(cmd.Cmd):
 			if 'open' in roomitem.getKeywords():
 				cur_room.modifyDirectionalBoundary(roomitem.getDirectionToChange())
 				print 'You opened ' + yellow(open_item) + '.'
-				if cur_room.getDirectionByName(roomitem.getDirectionToChange()):
-					print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has opened!'
-				else:
-					print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has closed!'
+				if roomitem.getUnlockText() != '':
+					print self.parser.parseDescription(roomitem.getUnlockText())
+				#if cur_room.getDirectionByName(roomitem.getDirectionToChange()):
+				#	print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has opened!'
+				#else:
+				#	print 'The ' + cyan(roomitem.getDirectionToChange()) + cyan('ern') + ' passage has closed!'
 			else:
 				print "You can't open " + yellow(open_item) + '!'
 			
@@ -247,10 +250,28 @@ class CmdLine(cmd.Cmd):
 
 	def do_move(self, s):
 		global GLOBAL_TIME
+		global OUTSIDE_PLANE
+		global TIME_TO_DIE
+		print 'OUTSIDE_PLANE: ' + str(OUTSIDE_PLANE)
+		print 'GLOBAL_TIME: ' + str(GLOBAL_TIME)
 		#global TURBULENCE
 		#global TURBULENCE_START_TIME
 		#global TURBULENCE_STOP_TIME
+		if GLOBAL_TIME == TIME_TO_DIE:
+			self.print_death()
+			return True
+		if OUTSIDE_PLANE:
+			print "You're still flying!!! Or are you falling..."
+			GLOBAL_TIME += 1
+			return			
+		
+	#	player_x = self.player.getPos()[0]
+	#	player_y = self.player.getPos()[1]
+	#	print 'player_x: ' + str(player_x)
+	#	print 'player_y: ' + str(player_y)
 	
+		#if (player_x == 6 and player_y == 3) or (player_x == 6 and player_y == 7):
+
 		cur_room = self.map.getRooms()[self.player.getPos()]
 		player_x = self.player.getPos()[0]
 		player_y = self.player.getPos()[1]
@@ -259,51 +280,16 @@ class CmdLine(cmd.Cmd):
 		#print 'TURBULENCE_STOP_TIME = ' + str(TURBULENCE_STOP_TIME)
 		#print 'TURBULENCE = ' + str(TURBULENCE)
 
-		if GLOBAL_TIME == TIME_TO_DIE:
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'DDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHDEATHEATH'		
-			print 'You die.'
-			return True
+
 
 		TURBULENCE = random.randint(1,10)
-		if TURBULENCE < 3:
-			print '#!?#?!#?!#?!#?!?#!?#?!#?!#?!?#?!#?!#?!?#!#!?#?'
-			print '#TTTTTTTTTTTTTTTT#TTTTTTTTTTTTTTTTTTTTTTTTTTT#'
-			print '?UUUUUUUUUUUUUUUUUUUUU$UUUUUUUUUUUUUUUUUUUUUU?'
-			print '#RRRR!RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR#'
-			print '?BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB?'
-			print '#UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU#UUUUUUUUU#'
-			print '?LLLLLLLLLL?LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL?'
-			print '#EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE#'
-			print '?NNNNNNNNNNNNNNNNNN?NNNNNNNNNNNNNNNNNNNNNNNNN?'
-			print '#CCCCCCCCCCCCC!CCCCCCCCCCCCCCCCCCCC#CCCCCCCCC#'
-			print '?EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE?'
-			print '#!?#?!#?!#?!#?!?#!?#?!#?!#?!?#?!#?!#?!?#!#!?#!'
-			print 'Turbulence shakes you...'
+		if TURBULENCE < 2:
+			self.print_turb()
+			print 'Turbulence shakes you, forcing you to move in a random direction.'
 			dirs = ['n', 's', 'e', 'w']
 			s = dirs[random.randint(0,3)]
+
+			
 
 		if s == '':
 			print red('You have to specify what direction to move!')
@@ -330,6 +316,12 @@ class CmdLine(cmd.Cmd):
 			else:
 				print red("You can't move in that direction.")
 		elif s.lower() == 'east' or s.lower() == 'e' or s.lower() == 'right' or s.lower() == 'r':
+			if player_x + 1 == 7 and player_y == 6:
+				print "You're flying!!!!"
+				OUTSIDE_PLANE = True
+				GLOBAL_TIME += 1
+				TIME_TO_DIE = GLOBAL_TIME + 3
+				return
 			if cur_room.east:
 				self.player.setPos( (player_x + 1, player_y) )
 				self.do_look('')
@@ -341,6 +333,12 @@ class CmdLine(cmd.Cmd):
 			else:
 				print red("You can't move in that direction.")
 		elif s.lower() == 'west' or s.lower() == 'w' or s.lower() == 'left' or s.lower() == 'l':
+			if player_x - 1 == 3 and player_y == 6:
+				print "You're flying!!!!"
+				OUTSIDE_PLANE = True
+				GLOBAL_TIME += 1
+				TIME_TO_DIE = GLOBAL_TIME + 3
+				return
 			if cur_room.west:
 				self.player.setPos( (player_x - 1, player_y) )
 				self.do_look('')
@@ -469,3 +467,31 @@ class CmdLine(cmd.Cmd):
 	#########################
 	# Helper methods
 	#########################
+
+	def print_death(self):
+		print ' ______   ______   ________   _________  ___   ___'       
+		print '/_____/\ /_____/\ /_______/\ /________/\/__/\ /__/\  '    
+		print '\:::_ \ \\\\::::_\/_\::: _  \ \\\\__.::.__\/\::\ \\\\  \ \ '     
+		print ' \:\ \ \ \\\\:\/___/\\\\::(_)  \ \  \::\ \   \::\/_\ .\ \ '   
+		print '  \:\ \ \ \\\\::___\/_\:: __  \ \  \::\ \   \:: ___::\ \ '  
+		print '   \:\/.:| |\:\____/\\\\:.\ \  \ \  \::\ \   \: \ \\\\::\ \ ' 
+		print '    \____/_/ \_____\/ \__\/\__\/   \__\/    \__\/ \::\/ '
+
+	def print_turb(self):
+		turb_lines = []
+		turb_lines.append('                                                                                          _..._                        ')
+		turb_lines.append('                                               .---.                                   .-\'_..._\'\'.                     ')
+		turb_lines.append('                            /|                 |   |      __.....__        _..._     .\' .\'      \'.\     __.....__      ')
+		turb_lines.append('                            ||                 |   |  .-\'\'         \'.    .\'     \'.  / .\'            .-\'\'         \'.    ')
+		turb_lines.append('     .|             .-,.--. ||                 |   | /     .-\'\'"\'-.  `. .   .-.   .. \'             /     .-\'\'"\'-.  `.  ')
+		turb_lines.append('   .\' |_            |  .-. |||  __             |   |/     /________\   \|  \'   \'  || |            /     /________\   \ ')
+		turb_lines.append(' .\'     |   _    _  | |  | |||/\'__ \'.   _    _ |   ||                  ||  |   |  || |            |                  | ')
+		turb_lines.append('\'--.  .-\'  | \'  / | | |  | ||:/`  \'. \' | \'  / ||   |\    .-------------\'|  |   |  |. \'            \    .-------------\' ')
+		turb_lines.append('   |  |   .\' | .\' | | |  \'- ||     | |.\' | .\' ||   | \    \'-.____...---.|  |   |  | \ \'.          .\    \'-.____...---. ')
+		turb_lines.append('   |  |   /  | /  | | |     ||\    / \'/  | /  ||   |  `.             .\' |  |   |  |  \'. `._____.-\'/ `.             .\'  ')
+		turb_lines.append('   |  \'.\'|   `\'.  | | |     |/\'..\' /|   `\'.  |\'---\'    `\'\'-...... -\'   |  |   |  |    `-.______ /    `\'\'-...... -\'    ')
+		turb_lines.append('   |   / \'   .\'|  \'/|_|     \'  `\'-\'` \'   .\'|  \'/                        |  |   |  |             `                      ')
+		turb_lines.append('   `\'-\'   `-\'  `--\'                   `-\'  `--\'                         \'--\'   \'--\'                                    ')
+		for line in turb_lines:
+			print line
+			time.sleep(0.1)
