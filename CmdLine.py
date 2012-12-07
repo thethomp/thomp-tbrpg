@@ -60,9 +60,39 @@ class CmdLine(cmd.Cmd):
 			#else:
 			#	print filename + " can't be found"
 
+	def do_main_menu(self, s):
+		pass
+
 	######################
 	# Action methods
 	######################
+
+	def do_pull( self, s ):
+		if 'parachute' in string.lower(s):
+			item = self.player.getEquippedItemByName('parachute')
+			if item != None:
+				if OUTSIDE_PLANE:
+					print 'You WIN! Congratulation!!!'
+					return True
+				else:
+					print "Pulling that right now isn't very helpful..."
+			else:
+				print "You don't have one of those!"
+		else:
+			print "You can't pull that!"
+				
+#		if item == None:
+#			print "You can't pull something that you don't have equipped!"
+#		else:
+#			if OUTSIDE_AIRPLANE:
+#				if string.lower(item.name()) == 'parachute':
+#					print "Congratulations, you've survived!"
+#				else:
+#					print "?"
+#			else:
+#				if string.lower
+				
+
 
 	def do_equip( self, s ):
 		item = self.player.getInventoryItemByName(s)
@@ -208,10 +238,12 @@ class CmdLine(cmd.Cmd):
 		print magenta('=== INVENTORY ===')
 		for item in inv:
 			print yellow(item.getName())
+			print yellow(' - ' + item.getExamineText().replace('<i>',''))
 		print magenta('=================')
 		print magenta('=== EQUIPPED  ===')
 		for item in  self.player.getEquipped():
 			print yellow(item.getName())
+			print yellow(' - ' + item.getExamineText().replace('<i>',''))
 		print magenta('=================')
 
 	def do_look(self, s):
@@ -288,8 +320,6 @@ class CmdLine(cmd.Cmd):
 			print 'Turbulence shakes you, forcing you to move in a random direction.'
 			dirs = ['n', 's', 'e', 'w']
 			s = dirs[random.randint(0,3)]
-
-			
 
 		if s == '':
 			print red('You have to specify what direction to move!')

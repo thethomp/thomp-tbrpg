@@ -59,6 +59,13 @@ class Player(object):
 	def getEquipped(self):
 		return self.equipped
 
+	def getEquippedItemByName(self, name):
+		for item in self.equipped:
+			if string.lower(name) == string.lower(item.getName()):
+				return item
+		return None 
+		#return [string.lower(x.getName()) for x in self.equipped]
+
 	def equipItem(self, i):
 		self.equipped.append(i)
 		self.inventory.remove(i)

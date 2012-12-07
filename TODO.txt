@@ -1,3 +1,6 @@
+-- Known Bugs --
+* Can move out of the exit hatch without opening it.
+
 -- Needed for beta testing of tutorial level --
 * Polish description text.
 	-  Make sure all descriptions make sense, even after the player picks up items/advances the story.
@@ -10,6 +13,7 @@ DONE * Time countdown mechanic for timing the crash of the plane?
 * Implement death. This will occur if:
 	- Player doesn't jump out of plane before timer runs out.
 	- Player doesn't pull cord after allotted amount of time after jumping from plane.
+* Add option to start a new game, load a game, or exit after death.
 
 -- Command Line Parser --
 DONE 	Implement shortcuts for commands (e.g. look = l)

@@ -304,7 +304,7 @@ items:
     unlock_item: []
     item_list: []
     map_side_to_change: None
-    examine_text: "A <i>parachute that looks equippable."
+    examine_text: "A <i>parachute that looks equippable. A <i>cord hangs from the side of the <i>parachute."
     equippable: True
     strength: 0
     intellect: 0
