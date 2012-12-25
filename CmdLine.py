@@ -288,7 +288,6 @@ class CmdLine(cmd.Cmd):
 				print yellow(i.getName())
 
 	def do_move(self, s):
-		self.print_death()
 		global GLOBAL_TIME
 		global OUTSIDE_PLANE
 		global TIME_TO_DIE
@@ -323,7 +322,7 @@ class CmdLine(cmd.Cmd):
 
 
 		TURBULENCE = random.randint(1,10)
-		if TURBULENCE < 8:
+		if TURBULENCE < 0:
 			self.print_turb()
 			print 'Turbulence shakes you, forcing you to move in a random direction.'
 			dirs = ['n', 's', 'e', 'w']
