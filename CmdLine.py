@@ -72,8 +72,15 @@ class CmdLine(cmd.Cmd):
 			item = self.player.getEquippedItemByName('parachute')
 			if item != None:
 				if OUTSIDE_PLANE:
-					print 'You WIN! Congratulation!!!'
-					return True
+					oxy_item = self.player.getEquippedItemByName('oxygen mask')
+					if oxy_item != None:
+							print "You pull your parachute cord, breathing without any trouble with your oxygen mask. Gradually, you fall downward to the earth below..."
+							print "Congratulations! You've successfully completed Episode 0 of Thomp's Text Based RPG"
+							print "Visit http://www.TheThomp.com to find updates and more episodes to play!"
+							return True
+					else:
+						print "You try to pull the cord on the parachute, but you are having trouble catching your breath."
+						return
 				else:
 					print "Pulling that right now isn't very helpful..."
 			else:
@@ -281,11 +288,12 @@ class CmdLine(cmd.Cmd):
 				print yellow(i.getName())
 
 	def do_move(self, s):
+		self.print_death()
 		global GLOBAL_TIME
 		global OUTSIDE_PLANE
 		global TIME_TO_DIE
-		print 'OUTSIDE_PLANE: ' + str(OUTSIDE_PLANE)
-		print 'GLOBAL_TIME: ' + str(GLOBAL_TIME)
+		#print 'OUTSIDE_PLANE: ' + str(OUTSIDE_PLANE)
+		#print 'GLOBAL_TIME: ' + str(GLOBAL_TIME)
 		#global TURBULENCE
 		#global TURBULENCE_START_TIME
 		#global TURBULENCE_STOP_TIME
@@ -315,7 +323,7 @@ class CmdLine(cmd.Cmd):
 
 
 		TURBULENCE = random.randint(1,10)
-		if TURBULENCE < 2:
+		if TURBULENCE < 8:
 			self.print_turb()
 			print 'Turbulence shakes you, forcing you to move in a random direction.'
 			dirs = ['n', 's', 'e', 'w']
@@ -432,7 +440,7 @@ class CmdLine(cmd.Cmd):
 	def do_eq(self, s):
 		return self.do_equip(s)
 
-	def do_e(self, s):
+	def do_ex(self, s):
 		return self.do_examine(s)
 
 	def do_m(self, s):
@@ -450,37 +458,87 @@ class CmdLine(cmd.Cmd):
 	########################
 	# Help methods
 	########################
+	def help_attack(self):
+		print 'Attack an enemy and enter combat mode'
+		print magenta('IN DEVELOPMENT')
+
+	def help_drop(self):
+		print "Drop an item."
+		print "e.g. drop oxygen mask"
+	
+	def help_enemies(self):
+		print 'List all the combattable enemies in the room'
+		print magenta('IN DEVELOPMENT')
+	
+	def help_equip(self):
+		print "Equip an item. Some items are equippable, some are not"
+		print "e.g. 'equip oxygen mask'"
+
+	def help_eq(self):
+		print "Shortened 'equip' command. See 'help equip'"
+
+	def help_examine(self):
+		print 'Examine an item, this will tell you more about that item'
+		print "e.g. examine door"
+	
+	def help_exit(self):
+		print 'Exit Game'
+		print red('WARNING - Any unsaved changes will be lost.')
+
+	def help_ex(self):
+		print "Shortened 'examine' command. See 'help examine'"
+
+	def help_help(self):
+		print "Print all possible commands!"
+
+	def help_inventory(self):
+		print "List your inventory. Lets you know what you have equipped, and what is not"
+
+	def help_inv(self):
+		print "Shortened inventory command. See 'help inventory'"
+
+	def help_load(self):
+		print 'Load a saved game file.'
+		print 'USAGE: load example_saved_game'
+	
 	def help_look(self):
 		print 'Look around the room.'
 		print 'You can also look in different directions to discover new things.'
 		print 'e.g. look north, look east, etc...'
 
+	def help_l(self):
+		print "Shortened 'look' command. See 'help look'."
+
 	def help_move(self):
 		print 'Move around the map'
 		print "Try things like 'move north', 'move south', etc..."
 
-	def help_stats(self):
-		print 'Show the core stats of your character.'
+	def help_m(self):
+		print "Shortened 'move' command. See 'help move'"
 	
 	def help_new(self):
 		print 'Start a new game.' 
 		print red('WARNING - You will lose any unsaved changes.')
 
-	def help_load(self):
-		print 'Load a saved game file.'
-		print 'USAGE: load example_saved_game'
+	def help_open(self):
+		print "Some items can be opened. Use this command to open them."
+		print "e.g. open door"
 
-	def help_save(self):
-		print 'Save game.'
-		print red('WARNING - If you give the name of a file that already exists, this file will be overwritten.')
-
-	def help_exit(self):
-		print 'Exit Game'
-		print red('WARNING - Any unsaved changes will be lost.')
+	def help_pull(self):
+		print "Some items can be pulled. Use this command to pull them."
+		print "e.g. pull latch"
 	
 	def help_quit(self):
 		print 'Exit Game'
 		print red('WARNING - Any unsaved changes will be lost.')
+
+	def help_stats(self):
+		print 'Show the core stats of your character.'
+		print magenta('IN DEVELOPMENT')
+
+	def help_save(self):
+		print 'Save game.'
+		print red('WARNING - If you give the name of a file that already exists, this file will be overwritten.')
 
 	######################
 	# Debugging commands
