@@ -322,7 +322,7 @@ class CmdLine(cmd.Cmd):
 
 
 		TURBULENCE = random.randint(1,10)
-		if TURBULENCE < 0:
+		if TURBULENCE < 2:
 			self.print_turb()
 			print 'Turbulence shakes you, forcing you to move in a random direction.'
 			dirs = ['n', 's', 'e', 'w']
