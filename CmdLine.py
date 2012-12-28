@@ -46,7 +46,7 @@ class CmdLine(cmd.Cmd):
 	######################
 
 	def do_launch(self, s):
-		print cyan('Welcome ') +  yellow('to') + magenta(" Thomp's") + green(" Text Based") + red(" RPG!")
+		print 'Welcome to ' + magenta("Must Survive: Episode 0 - Elevated")
 		print "(1) New Game"
 		print "(2) Load Game"
 		response = raw_input('What would you like to do? ')
