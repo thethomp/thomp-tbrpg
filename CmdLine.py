@@ -6,7 +6,7 @@ from Player import *
 from Map import *
 from Room import *
 from Enemy import *
-from TextUtilities import red, red_bg, green, green_bg, magenta, magenta_bg, yellow, yellow_bg, cyan, cyan_bg, white_bg, bright
+from TextUtilities import red, red_bg, green, green_bg, magenta, magenta_bg, yellow, yellow_bg, cyan, cyan_bg, white_bg, bright, format_string
 
 """
 General notes ---
@@ -34,7 +34,7 @@ class CmdLine(cmd.Cmd):
 
 	map = None
 	#prompt = Fore.RED + 'TBRPG>> ' + Fore.RESET
-	prompt = 'TBRPG>> '
+	prompt = '>> '
 	parser = Parser()
 	player = None
 	inCombat = False
@@ -46,9 +46,9 @@ class CmdLine(cmd.Cmd):
 	######################
 
 	def do_launch(self, s):
-		print 'Welcome to ' + magenta("Must Survive: Episode 0 - Elevated")
-		print "(1) New Game"
-		print "(2) Load Game"
+		print magenta("Must Survive: Episode 0 - Elevated")
+		print cyan("(1) New Game")
+		print cyan("(2) Load Game")
 		response = raw_input('What would you like to do? ')
 		if response == '1':
 			self.onecmd('new')
@@ -257,29 +257,29 @@ class CmdLine(cmd.Cmd):
 		cur_room = self.map.getRooms()[self.player.getPos()]
 		dir = s.lower()
 		if s == '':
-			print self.parser.parseDescription(cur_room.description)
+			print format_string(self.parser.parseDescription(cur_room.description))
 		elif dir == 'north' or dir == 'n' or dir == 'forward' or dir == 'f':
 			if cur_room.isAltDescActive('north'):
-				print self.parser.parseDescription(cur_room.getAltDesc('north'))
+				print format_string(self.parser.parseDescription(cur_room.getAltDesc('north')))
 			else:
-				print self.parser.parseDescription(cur_room.north_desc)
+				print format_string(self.parser.parseDescription(cur_room.north_desc))
 			#print magenta(cur_room.north_desc)
 		elif dir == 'south' or dir == 's' or dir == 'back' or dir == 'b':
 			if cur_room.isAltDescActive('south'):
-				print self.parser.parseDescription(cur_room.getAltDesc('south'))
+				print format_string(self.parser.parseDescription(cur_room.getAltDesc('south')))
 			else:
-				print self.parser.parseDescription(cur_room.south_desc)
+				print format_string(self.parser.parseDescription(cur_room.south_desc))
 		elif dir == 'east' or dir == 'e' or dir == 'right' or dir == 'r':
 			if cur_room.isAltDescActive('east'):
-				print self.parser.parseDescription(cur_room.getAltDesc('east'))
+				print format_string(self.parser.parseDescription(cur_room.getAltDesc('east')))
 			else:
-				print self.parser.parseDescription(cur_room.east_desc)
+				print format_string(self.parser.parseDescription(cur_room.east_desc))
 			#print magenta(cur_room.east_desc)
 		elif dir == 'west' or dir == 'w' or dir == 'left' or dir == 'l':
 			if cur_room.isAltDescActive('west'):
-				print self.parser.parseDescription(cur_room.getAltDesc('west'))
+				print format_string(self.parser.parseDescription(cur_room.getAltDesc('west')))
 			else:
-				print self.parser.parseDescription(cur_room.west_desc)
+				print format_string(self.parser.parseDescription(cur_room.west_desc))
 		else:
 			return
 		if len(cur_room.getDroppedItems()) > 0:
