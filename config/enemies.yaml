@@ -1,6 +1,6 @@
 ---
 id: 1
-name: Prototype Enemy
+name: Cockroach
 hp: 50
 mp: 50
-abilities: [3]
+abilities: [5]

@@ -152,6 +152,9 @@ class Room(object):
 	def getEnemies(self):
 		return self.enemies
 
+	def addEnemy(self, e):
+		self.enemies.append(e)
+
 	def setEnemies(self, e):
 		self.enemies = e
 

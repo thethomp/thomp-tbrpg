@@ -30,7 +30,7 @@ items:
   examine_text: "A <i>latch to open the door."
   equippable: False
   droppable_items: []
-enemies: []
+enemies: [1]
 ---
 x: 5
 y: 10

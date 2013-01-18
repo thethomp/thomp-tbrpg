@@ -9,11 +9,11 @@ DONE	- Add the capability to interact with items that are more than one word in 
 DONE * Add turbulence mechanic for when player leaves the captain's cabin.
 	REVISED - Turbulence will now occur 20% of the moves you make.
 DONE * Time countdown mechanic for timing the crash of the plane?
-* Implement 'pull cord' ability for parachute.
-* Implement death. This will occur if:
-	- Player doesn't jump out of plane before timer runs out.
-	- Player doesn't pull cord after allotted amount of time after jumping from plane.
-* Add option to start a new game, load a game, or exit after death.
+DONE * Implement 'pull cord' ability for parachute.
+DONE * Implement death. This will occur if:
+		- Player doesn't jump out of plane before timer runs out.
+		- Player doesn't pull cord after allotted amount of time after jumping from plane.
+DONE * Add option to start a new game, load a game, or exit after death.
 
 -- Command Line Parser --
 DONE 	Implement shortcuts for commands (e.g. look = l)
