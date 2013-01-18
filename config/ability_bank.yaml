@@ -1,0 +1,35 @@
+---
+id: 1
+name: Falcon Punch
+description: "FALCON PUNCH! A forceful punch surrounded by a flaming falcon."
+level_req: 1
+damage: 50
+for_player: True
+---
+id: 2
+name: Kick
+description: "A devestating high kick."
+level_req: 1
+damage: 30
+for_player: True
+---
+id: 3
+name: Jab
+description: "A quick jab, pretty piddly."
+level_req: 1
+damage: 10
+for_player: False
+---
+id: 4
+name: Karate Chop
+description: "A firm strike using the part of the hand opposite the thumb."
+level_req: 2
+damage: 40
+for_player: True
+---
+id: 5
+name: Bite
+description: "A vicious bite."
+level_req: 1
+damage: 10
+for_player: False
