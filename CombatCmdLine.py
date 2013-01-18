@@ -1,5 +1,5 @@
 from colorama import *
-import cmd
+import cmd, time
 from TextUtilities import red, red_bg, green, green_bg, magenta, magenta_bg, yellow, yellow_bg, cyan, cyan_bg, white_bg, bright, format_string
 
 class CombatCmdLine(cmd.Cmd):
@@ -24,13 +24,17 @@ class CombatCmdLine(cmd.Cmd):
 			enemy_ability = self.enemy.getAbilities()[0]
 			self.print_enemy_status(self.enemy)
 			print red("--------- Enemy's Turn --------------")
+			time.sleep(1.0)
 			print self.enemy.getName() + " used " + self.enemy.getAbilities()[0].getName() + "!"
+			time.sleep(1.0)
 			self.player.setHP(self.player.getHP() - enemy_ability.getDamage())
 			print self.enemy.getName() + " dealt " + magenta(str(enemy_ability.getDamage())) + " to you!"
-			print red("--------- End Enemy's Turn --------------")
+			time.sleep(1.0)
 			self.print_player_status()
+			print red("--------- End Enemy's Turn --------------")
 		else:
-			print "You defeated " + red(self.enemy.getName())
+			time.sleep(1.0)
+			print red("You defeated " + red(self.enemy.getName()))
 			self.enemy.setHP(0)
 			return True
 
