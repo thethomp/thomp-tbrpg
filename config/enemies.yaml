@@ -3,4 +3,5 @@ id: 1
 name: Cockroach
 hp: 50
 mp: 50
+xp: 10
 abilities: [5]

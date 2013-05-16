@@ -43,7 +43,7 @@ DONE	stats
 DONE 1. Inventory system
 DONE 2. Interactable items (chests, keys/doors, etc)
 3. NPC Dialogue exchange
-4. Combat
+IN PROGRESS 4. Combat
 
 
 -- Tackling Next --
@@ -59,8 +59,9 @@ DONE	* Add unequip command.
 ** Combat!!
 	* Need to get the level requirements working
 	* Come up with experience gain mechanic
-		* Each enemy will be worth X XP. When the enemy is defeated, player will have that XP added to their XP pool.
+DONE	* Each enemy will be worth X XP. When the enemy is defeated, player will have that XP added to their XP pool.
 		* Decide on how much XP per level there will be. Should it grow linearly, exponentially, etc.
+		* What happens when the player levels up?
 		* Firm up the level requirements for ability learning.
 			* How does the player learn new abilities? Skill points that they can use to get an ability of their choice?
 	* Player has list of abilities kept in YAML file.

@@ -13,6 +13,9 @@ class Player(object):
 		self.hp = 100
 		self.mp = 100
 		self.pos = (0,0)
+		self.xp = 0
+		self.next_level_xp = 100
+		self.level = 1
 
 		### Load player abilities
 		### Load ability data   
@@ -26,6 +29,24 @@ class Player(object):
 			new_a.setDamage(a['damage'])
 			new_a.setForPlayer(a['for_player'])
 			self.abilities.append(new_a)
+
+	def setLevel(self, level):
+		self.level = level
+
+	def getLevel(self):
+		return self.level
+
+	def setNextLevelXP(self, xp):
+		self.next_level_up = xp
+
+	def getNextLevelXP(self):
+		return self.next_level_xp
+
+	def getXP(self):
+		return self.xp
+
+	def setXP(self, xp):
+		self.xp = xp
 
 	def getHP(self):
 		return self.hp

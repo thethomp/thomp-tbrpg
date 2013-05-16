@@ -420,7 +420,8 @@ class CmdLine(cmd.Cmd):
 		print 'HP: ' + str(self.player.getHP())
 		print 'MP: ' + str(self.player.getMP())	
 		print 'Strength: ' + str(self.player.getStrength())	
-		print 'Intellect: ' + str(self.player.getIntellect())	
+		print 'Intellect: ' + str(self.player.getIntellect())
+		print 'XP: [ ' + str(self.player.getXP()) + ' / ' + str(self.player.getNextLevelXP()) +' ]'
 
 	def do_save(self, s):
 		save_path = 'saved_games/'

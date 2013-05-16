@@ -35,7 +35,10 @@ class CombatCmdLine(cmd.Cmd):
 		else:
 			time.sleep(1.0)
 			print red("You defeated " + red(self.enemy.getName()))
+			print "You gained " + magenta(str(self.enemy.getXP())) + " XP" + "!"
+			self.player.setXP(self.player.getXP() + self.enemy.getXP())
 			self.enemy.setHP(0)
+			self.player
 			return True
 
 

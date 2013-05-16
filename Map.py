@@ -100,6 +100,7 @@ class Map(object):
 			new_e.setName(e['name'])
 			new_e.setHP(e['hp'])	
 			new_e.setMP(e['mp'])
+			new_e.setXP(e['xp'])
 			for a_id in e['abilities']:
 				new_e.addAbility(self.ability_dict[a_id])
 			self.enemies[id] = new_e
