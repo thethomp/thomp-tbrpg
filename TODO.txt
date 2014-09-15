@@ -1,5 +1,16 @@
+-- Enhancements --
+* Externalize specialized look commands to episode specific config files.
+	- i.e. Instead of hard coding the move/look commands that are specific to being outside of the plane,
+	have a configuration file to keep track of these things to keep the CmdLine class more generic.
+	- Can have checks within the CmdLine class for the specific episodes.
+		-- e.g. if EPISODE_0 and PLAYER_STATE == OUTSIDE_PLANE_EPSIDODE_1: print proper look command 
+
 -- Known Bugs --
 * Can move out of the exit hatch without opening it.
+* Leaving through the exit hatch crashes the game. 
+	SOLUTION Need to add 2 more rooms to the config file; one for each exit. All the look 
+	descriptions will be the same, and can take out the hardcoded look and move values? If not, find
+	a way to do this.
 
 -- Needed for beta testing of tutorial level --
 * Polish description text.
