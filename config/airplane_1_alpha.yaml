@@ -231,6 +231,7 @@ look_north: "The captain's cabin <i>door is in front of you."
 look_south: "You look back out over the plane full of people."
 look_west: "The <i>cabin <i>door."
 look_east: "A flight attendant is on the floor, laying in a fetal position."
+look_alt_north: "The cockpit is ahead."
 north: False
 south: True
 east: False
@@ -240,6 +241,7 @@ items:
   keyword: ['use']
   unlock_item: ['key']
   unlock_text: "The <i>door unlocks and swings ajar, allowing entry into the captain's cabin."
+  alt_text_dir: 'north'
   item_list: []
   map_side_to_change: north
   examine_text: "The <i>door to the captain's cabin. It appears you need a key to unlock this."
