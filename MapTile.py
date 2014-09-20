@@ -30,3 +30,6 @@ class MapTile:
 
     def print_tile(self):
         print self.tile
+
+	def get_tile(self):
+		return self.tile
