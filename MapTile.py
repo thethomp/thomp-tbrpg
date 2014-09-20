@@ -7,6 +7,8 @@ class MapTile:
         self.inside= inchar
         self.tile = []
 
+        self.create_tile()#load up tile, no reason to call create_tile()?? for each
+
     def get_xdim(self):
         return self.xdim
 
@@ -22,14 +24,17 @@ class MapTile:
         lst=[]
         for num in range(0,y):
             if num in (0,y-1):
-                self.tile.append([self.perim]*x)
+                self.tile.append(self.perim*x)
             else:
-                self.tile.append([self.perim] +
-                                 [self.inside]*(x-2) +
-                                 [self.perim])
+                self.tile.append(self.perim +
+                                 self.inside*(x-2) +
+                                 self.perim)
 
     def print_tile(self):
         print self.tile
 
-	def get_tile(self):
-		return self.tile
+    def print_row(self,num):
+        print self.tile[num]
+	
+    def get_tile(self):
+	return self.tile
