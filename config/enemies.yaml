@@ -1,0 +1,6 @@
+---
+id: 1
+name: Prototype Enemy
+hp: 50
+mp: 50
+abilities: [3]

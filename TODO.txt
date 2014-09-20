@@ -1,0 +1,73 @@
+-- Known Bugs --
+* Can move out of the exit hatch without opening it.
+
+-- Needed for beta testing of tutorial level --
+* Polish description text.
+	-  Make sure all descriptions make sense, even after the player picks up items/advances the story.
+DONE * Add oxygen mask to lockbox, player must equip before jumping from plane.
+DONE	- Add the capability to interact with items that are more than one word in title length.
+DONE * Add turbulence mechanic for when player leaves the captain's cabin.
+	REVISED - Turbulence will now occur 20% of the moves you make.
+DONE * Time countdown mechanic for timing the crash of the plane?
+* Implement 'pull cord' ability for parachute.
+* Implement death. This will occur if:
+	- Player doesn't jump out of plane before timer runs out.
+	- Player doesn't pull cord after allotted amount of time after jumping from plane.
+* Add option to start a new game, load a game, or exit after death.
+
+-- Command Line Parser --
+DONE 	Implement shortcuts for commands (e.g. look = l)
+NOT DOING Make the move command trigger a specific description depending on where the player is moving from.
+	e.g. move north = You look down the aisle of seats.
+		 move south = You reach the back of the plane.
+DONE 	Change directional look descriptions based on whether an item is present or not.
+	e.g. look north = A shiny key glimmers on the ground.
+		 take key
+		 look north = The ground is barren.
+
+Commands to implement:
+DONE	examine
+DONE	take
+DONE	equip
+	put
+DONE	drop
+	search, forage, gather
+	eat
+	use (potion, apply enchantment, eat food)
+DONE	stats
+	abilities
+	interact
+	pick (lock)
+
+-- Major Mechanics --
+DONE 1. Inventory system
+DONE 2. Interactable items (chests, keys/doors, etc)
+3. NPC Dialogue exchange
+4. Combat
+
+
+-- Tackling Next --
+DONE ** Inventory System
+DONE 	* Highlight items that can be examined or picked up in the 'look' text.
+DONE	* Create key and door that can't be opened without the key to exemplify interactable objects.
+DONE	* Implement stats. Strength, Intellect, to start.
+DONE	* Create items to equip. Staff and a sword?
+DONE	* Show equipped items when looking at inventory.
+DONE	* Add shortened version of inventory - inv.
+DONE	* Add unequip command. 
+
+** Combat!!
+	* Player has list of abilities kept in YAML file.
+		* Each ability has a level requirement and a flag for if it's unlocked or not.
+	* Combat mode will allow the player to type in what ability they want to use (via the 'use' command).
+	* 'abilities' command will list the abilities that the player has unlocked and what they do.
+	* After an ability is triggered by player, roll is done, and enemy will (for the time being, randomly) choose an ability to attack with.
+	* Each enemy will be defined in the YAML config with starting HP, MP, and ability list.
+	* Each ability will be defined in YAML, with level requirement, damage, unlock flag.
+DONE * Create Ability.py class to hold ability specifics.
+		* Name
+		* Level Req
+		* Player unlocked flag
+		* Damage
+
+* Implement experience gain, levels, leveling up, etc.	

@@ -1,0 +1,320 @@
+---
+x: 6
+y: 10
+description: "You startle yourself to an awakened state, realizing that you're sitting in an airplane restroom. What happened?! Why are you sleeping in this dank, disgusting little room? And what is that god awful stench?!? You hear the low buzz of the airplane through the door. Time to figure out what the hell is going on..."
+look_north: "Water sloshes in a small sink."
+look_south: "Some paper towels hang out of the repository."
+look_east: "The small airplane toilet emits a nasty stench that resembles a freshly made chemical-feces milkshake. Yuck."
+look_west: "The restroom <i>door<i> is <i>latched closed, indicating the stall is occupied."
+look_alt_west: "The restroom <i>door is open."
+north: False
+south: False
+east: False
+west: False
+items:
+- name: Door
+  keyword: ['use']
+  unlock_item: ['latch']
+  unlock_text: "The <i>door swings open and a wall of breathable air hits your face. Ahhhhhhh."
+  alt_text_dir: 'west'
+  item_list: []
+  map_side_to_change: west
+  examine_text: "A standard airplane bathroom <i>door<i> with a <i>latch to lock it."
+  equippable: False
+  droppable_items: []
+- name: Latch
+  keyword: ['use']
+  unlock_item: []
+  item_list: []
+  map_side_to_change: None
+  examine_text: "A <i>latch to open the door."
+  equippable: False
+  droppable_items: []
+enemies: []
+---
+x: 5
+y: 10
+description: "You're in the very back of the plane, there are lavitories on either side of you."
+look_north: "You look down the rows of seats, toward the front of the plane."
+look_south: "You see cabinets ajar, with packaged food within, and on the floor."
+look_east: "The lavatory door remains open, with that horrendously gross stench flowing freely into your face."
+look_west: "Another restroom, with the door closed. It appears to be blocked on the inside."
+north: True
+south: False
+east: True
+west: False
+items: []
+enemies: []
+---
+x: 5
+y: 9
+description: "The plane is about half full. Everyone is asleep, or passed out, or something... They're silent for whatever reason."
+look_north: "You look toward the front of the plane, people are passed out in their seats... or sleeping... or something..."
+look_south: "The back of the plane is a few steps away, you can still catch a hint of the stench."
+look_east: "A mother and two children lay across the seats, seemingly unconcious."
+look_west: "A business man sits alone in the middle seat, head arched backward. He looks insanely uncomfortable."
+north: True
+south: True
+east: False
+west: False
+items: []
+enemies: []
+---
+x: 5
+y: 8
+description: "Still in the back half of the plane. An unusually obese man sits to your right, taking up all 3 seats."
+look_north: "The exit row is up ahead, probably worth noting."
+look_south: "The back of the plane... it looks... darker than before..."
+look_east: "You spot a bottle of <i>water underneath one of the rolls of fat of the man, just out of your reach. That might be useful for later..."
+look_west: "A group of three Orthadox Jewish men sit here, all with joined hands... what the hell is going on here..."
+north: True
+south: True
+east: True
+west: False
+items: []
+enemies: []
+---
+x: 6
+y: 8
+description: "You squeeze past fatty, and now stand upon him."
+look_north: "Skymall! You spot some Massage Boots on the cover... Need to remember to order those later."
+look_south: "The bottle of <i>water is just reachable under a fold of fat."
+look_east: "You look out the window. Clouds. Great."
+look_west: "You see the airplane aisle that runs through the center of the aircraft."
+look_alt_south: "Fat rolls over the side of the seat."
+north: False
+south: False
+east: False
+west: True
+items:
+- name: Water
+  keyword: ['take']
+  alt_text_dir: 'south'
+  unlock_item: []
+  item_list: []
+  map_side_to_change: None
+  examine_text: "An unopened bottle of <i>water<i>."
+  equippable: False
+  droppable_items: []
+enemies: []
+---
+x: 5
+y: 7
+description: "You stand in the center of the aisle, there are unconsious people on either side of you."
+look_north: "You look forward toward the front of the plane, the exit row is up ahead." 
+look_south: "Looking back toward the rear of the plane, you can still catch a whiff of the stench..."
+look_east: "A man sits hunched over his tray table."
+look_west: "A small woman is spralled out across all three seats."
+north: True
+south: True
+east: False
+west: False
+items: []
+enemies: []
+---
+x: 4
+y: 6
+description: "This is an exit row!."
+look_north: "The seats seem a little further up here, probably due to the exit row." 
+look_south: "You see a sea of unconcious travelers."
+look_east: "You look across the aisle, spotting the other emergency exit hatch."
+look_west: "There's an emergency <i>hatch here. You should probably be careful with this."
+north: False
+south: False
+east: True
+west: False
+items:
+- name: Hatch
+  keyword: ['open']
+  unlock_item: ['hatch']
+  unlock_text: "The emergency exit flies open to your <i>left, you hold on to the seats near you."
+  item_list: []
+  map_side_to_change: west
+  examine_text: "A <i>hatch that one can open to exit the plane."
+  equippable: False
+  droppable_items: []
+enemies: []
+---
+x: 5
+y: 6
+description: "You step into the exit row, noticing emergency exits on either side of you."
+look_north: "The captains door lingers ahead, but you've got a few more rows to get through."
+look_south: "The back of the plane seems to get further and further away... probably because you're getting closer to the front."
+look_east: "You see a few empty seats and an emergency hatch."
+look_west: "You see a few empty seats and an emergency hatch."
+north: True
+south: True
+east: True
+west: True
+items: []
+enemies: []
+---
+x: 6
+y: 6
+description: "There's an emergency exit <i>hatch here."
+look_north: "A half-full barf bag hangs from the seat pocket, dribbling onto the floor."
+look_south: "There are splatters of puke on the chairs, and a disgusting stench."
+look_east: "There's an emergency <i>hatch here. You should probably be careful with this."
+look_west: "You look out across the aisle at the other emergency exit."
+north: False
+south: False
+east: False
+west: True
+items:
+- name: Hatch
+  keyword: ['open']
+  unlock_item: ['hatch']
+  unlock_text: "The emergency exit flies open to your <i>right, you hold on to the seats near you."
+  item_list: []
+  map_side_to_change: east
+  examine_text: "A hatch that one can open to exit the plane."
+  equippable: False
+  droppable_items: []
+enemies: []
+---
+x: 5
+y: 5
+description: "Just another row of random folk, strewn about, unconcious."
+look_north: "The captain's cabin door looms ahead."
+look_south: "You look back, oh how far you've come..."
+look_east: "There's a man in a jester's costume here. Weird."
+look_west: "A mother and two small children cradled in her arms. They look creepily comfortable."
+north: True
+south: True
+east: False
+west: False
+items: []
+enemies: []
+---
+x: 4
+y: 4
+description: "A badge glimmers on the seat, it appears that this man was an Air Marshal. Maybe he's left some useful stuff around..." 
+look_north: "The seat backs are soaked in blood. A <i>key lies under the seat in front of the man."
+look_south: "You a mother with two small children in the seats behind you."
+look_east: "You look out across the aisle to see a set of seats filled with luggage. Where did the people go?"
+look_west: "You glance out the window, seeing nothing but a faint light behind a thick haze."
+look_alt_north: "The seat backs are soaked in blood." 
+north: False
+south: False
+east: True
+west: False
+items: 
+- name: Key
+  keyword: ['take']
+  unlock_item: []
+  item_list: []
+  alt_text_dir: 'north'
+  map_side_to_change: None
+  examine_text: "A small key that appears to go to a door of some kind."
+  equippable: False
+  droppable_items: []
+enemies: []
+---
+x: 5
+y: 4
+description: "Luggage fills the seats to your right, you see a glimmer of light to your left."
+look_north: "The front of the plane looms ahead, you can see the closed captain's door."
+look_south: "You look back, remembering the stench, you've finally escaped it!"
+look_east: "A mountain of luggage is heaped in the seats."
+look_west: "It looks like someone of interest was sitting in this seat, there are several items of interest strewn about."
+north: True
+south: True
+east: False
+west: True
+items: []
+enemies: []
+---
+x: 5
+y: 3
+description: "You step to the front of the plane."
+look_north: "The captain's cabin <i>door is in front of you."
+look_south: "You look back out over the plane full of people."
+look_west: "The <i>cabin <i>door."
+look_east: "A flight attendant is on the floor, laying in a fetal position."
+north: False
+south: True
+east: False
+west: True
+items:
+- name: Door
+  keyword: ['use']
+  unlock_item: ['key']
+  unlock_text: "The <i>door unlocks and swings ajar, allowing entry into the captain's cabin."
+  item_list: []
+  map_side_to_change: north
+  examine_text: "The <i>door to the captain's cabin. It appears you need a key to unlock this."
+  equippable: False
+  droppable_items: []
+enemies: []
+---
+x: 4
+y: 3
+description: "You step to the airplane cabin door."
+look_north: "An empty flight attendant's folding chair sits upright."
+look_south: "You look back out over the plane full of people."
+look_east: "You see a flight attendant on the other side of the plane, laying in the fetal position."
+look_west: "The airplane <i>cabin <i>door."
+north: False
+south: False
+east: True
+west: False
+items:
+- name: "Cabin Door"
+  keyword: ['use']
+  unlock_item: ['handle']
+  unlock_text: "You pull on the handle as hard as you can, but it won't budge. The door is jammed..."
+  item_list: []
+  map_side_to_change: None
+  examine_text: "Standard <i>cabin <i>door."
+  equippable: False
+  droppable_items: []
+- name: "Handle"
+  keyword: ['use']
+  unlock_item: []
+  item_list: []
+  map_side_to_change: None
+  examine_text: "Standard handle."
+  equippable: False
+  droppable_items: []
+enemies: []
+---
+x: 5
+y: 2
+description: "You've reached the captain's cabin. The pilot is hunched over, unconcious like the rest of the plane. This doesn't concern you really until you realized that NO ONE IS FLYING THE PLANE!! It's time to figure out a way off of this thing before this mysterious mist dissipates and you crash!"
+look_north: "You look out the windshield of the plane... what a view... of nothing but white."
+look_south: "The can see out the open door to the rest of the plane."
+look_east: "A <i>lockbox hangs on the wall."
+look_west: "The co-pilot's is out cold... panic starts to twinge in your stomach."
+north: False
+south: True
+east: False
+west: False
+items: 
+- name: Lockbox
+  keyword: ['use']
+  unlock_item: ['key']
+  unlock_text: "The lockbox opens up, spoils spill out onto the ground."
+  item_list: ['Parachute']
+  map_side_to_change: None
+  examine_text: "A standard <i>lockbox, it appears to have a similar <i>key hole to the door."
+  equippable: False
+  droppable_items:
+  - name: "Parachute"
+    keyword: ['take']
+    unlock_item: []
+    item_list: []
+    map_side_to_change: None
+    examine_text: "A <i>parachute that looks equippable. A <i>cord hangs from the side of the <i>parachute."
+    equippable: True
+    strength: 0
+    intellect: 0
+  - name: "Oxygen Mask"
+    keyword: ['take']
+    unlock_item: []
+    item_list: []
+    map_side_to_change: None
+    examine_text: "A mask to breath with when oxygen is low."
+    equippable: True
+    strength: 0
+    intellect: 0
+enemies: []
