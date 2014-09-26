@@ -4,9 +4,16 @@ class Ability(object):
 
 	def __init__(self):
 		self.name = ''
+		self.description = ''
 		self.level_req = 1
 		self.for_player = False
 		self.damage = 1
+
+	def setDescription(self, s):
+		self.description = s
+
+	def getDescription(self):
+		return self.description
 
 	def setName(self, s):
 		self.name = s

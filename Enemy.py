@@ -3,10 +3,15 @@
 class Enemy(object):
 	
 	def __init__(self):
-		self.name = 'Tyranosaur'
+		self.name = ''
 		self.hp = 100
 		self.mp = 100
+		self.xp = 0
 		self.abilities = []
+		self.pos = (0,0)
+
+	def setXP(self, xp):
+		self.xp = xp
 
 	def setName(self, n):
 		self.name = n
@@ -17,6 +22,9 @@ class Enemy(object):
 	def setMP(self, m):
 		self.mp = m
 
+	def getXP(self):
+		return self.xp
+
 	def getName(self):
 		return self.name
 
@@ -25,3 +33,15 @@ class Enemy(object):
 
 	def getMP(self):
 		return self.mp
+
+	def addAbility(self, a):
+		self.abilities.append(a)
+
+	def getAbilities(self):
+		return self.abilities
+
+	def setPos(self, pos):
+		self.pos = pos
+
+	def getPos(self):
+		return self.pos

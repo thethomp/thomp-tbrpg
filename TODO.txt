@@ -1,5 +1,16 @@
+-- Enhancements --
+* Externalize specialized look commands to episode specific config files.
+	- i.e. Instead of hard coding the move/look commands that are specific to being outside of the plane,
+	have a configuration file to keep track of these things to keep the CmdLine class more generic.
+	- Can have checks within the CmdLine class for the specific episodes.
+		-- e.g. if EPISODE_0 and PLAYER_STATE == OUTSIDE_PLANE_EPSIDODE_1: print proper look command 
+
 -- Known Bugs --
 * Can move out of the exit hatch without opening it.
+* Leaving through the exit hatch crashes the game. 
+	SOLUTION Need to add 2 more rooms to the config file; one for each exit. All the look 
+	descriptions will be the same, and can take out the hardcoded look and move values? If not, find
+	a way to do this.
 
 -- Needed for beta testing of tutorial level --
 * Polish description text.
@@ -9,11 +20,11 @@ DONE	- Add the capability to interact with items that are more than one word in 
 DONE * Add turbulence mechanic for when player leaves the captain's cabin.
 	REVISED - Turbulence will now occur 20% of the moves you make.
 DONE * Time countdown mechanic for timing the crash of the plane?
-* Implement 'pull cord' ability for parachute.
-* Implement death. This will occur if:
-	- Player doesn't jump out of plane before timer runs out.
-	- Player doesn't pull cord after allotted amount of time after jumping from plane.
-* Add option to start a new game, load a game, or exit after death.
+DONE * Implement 'pull cord' ability for parachute.
+DONE * Implement death. This will occur if:
+		- Player doesn't jump out of plane before timer runs out.
+		- Player doesn't pull cord after allotted amount of time after jumping from plane.
+DONE * Add option to start a new game, load a game, or exit after death.
 
 -- Command Line Parser --
 DONE 	Implement shortcuts for commands (e.g. look = l)
@@ -43,7 +54,7 @@ DONE	stats
 DONE 1. Inventory system
 DONE 2. Interactable items (chests, keys/doors, etc)
 3. NPC Dialogue exchange
-4. Combat
+IN PROGRESS 4. Combat
 
 
 -- Tackling Next --
@@ -57,17 +68,23 @@ DONE	* Add shortened version of inventory - inv.
 DONE	* Add unequip command. 
 
 ** Combat!!
+	* Need to get the level requirements working
+	* Come up with experience gain mechanic
+DONE	* Each enemy will be worth X XP. When the enemy is defeated, player will have that XP added to their XP pool.
+		* Decide on how much XP per level there will be. Should it grow linearly, exponentially, etc.
+		* What happens when the player levels up?
+		* Firm up the level requirements for ability learning.
+			* How does the player learn new abilities? Skill points that they can use to get an ability of their choice?
 	* Player has list of abilities kept in YAML file.
 		* Each ability has a level requirement and a flag for if it's unlocked or not.
-	* Combat mode will allow the player to type in what ability they want to use (via the 'use' command).
-	* 'abilities' command will list the abilities that the player has unlocked and what they do.
-	* After an ability is triggered by player, roll is done, and enemy will (for the time being, randomly) choose an ability to attack with.
-	* Each enemy will be defined in the YAML config with starting HP, MP, and ability list.
-	* Each ability will be defined in YAML, with level requirement, damage, unlock flag.
+DONE	* Combat mode will allow the player to type in what ability they want to use (via the 'action' command).
+DONE	* 'abilities' command will list the abilities that the player has unlocked and what they do.
+DONE	* After an ability is triggered by player, roll is done, and enemy will (for the time being, randomly) choose an ability to attack with.
+DONE	* Each enemy will be defined in a YAML config (enemies.yaml) with starting HP, MP, and ability list.
+DONE	* Each ability will be defined in YAML, with level requirement, damage, unlock flag.
 DONE * Create Ability.py class to hold ability specifics.
-		* Name
-		* Level Req
-		* Player unlocked flag
-		* Damage
+DONE		* Name
+DONE		* Level Req
+DONE		* Player unlocked flag
+DONE		* Damage
 
-* Implement experience gain, levels, leveling up, etc.	

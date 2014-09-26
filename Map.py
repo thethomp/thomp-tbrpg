@@ -10,20 +10,9 @@ class Map(object):
 		yaml_path = 'config/airplane_1_alpha.yaml'
 		self.rooms = {}
 		self.abilities = []
+		self.ability_dict = {}
 		self.enemies = {}
 		room_data = yaml.load_all( open(yaml_path, 'r') )
-	
-		### Load enemy data
-		#enemy_yaml = 'config/enemies.yaml'
-		#enemy_data = yaml.load_all( open(enemy_yaml, 'r') )
-		#for e in enemy_data:
-	#		new_e = Enemy()
-#			id = e['id']
-#			new_e.setName(e['name'])
-#			new_e.setHP(e['hp'])	
-#			new_e.setMP(e['mp'])
-#			self.enemies[id] = new_e
-		
 	
 		### Load map data
 		print "Loading map file..."
@@ -90,16 +79,31 @@ class Map(object):
 		print "Map file loaded!"
 	
 		### Load ability data	
-#		ability_yaml_path = 'config/abilities.yaml'
-#		ability_data = yaml.load_all( open(ability_yaml_path, 'r') )
-#		for a in ability_data:
-#			new_a = Ability()
-#			new_a.setName(a['name'])
-#			new_a.setLevelReq(a['level_req'])
-#			new_a.setDamage(a['damage'])
-#			new_a.setForPlayer(a['for_player'])
-#			self.abilities.append(new_a)
-		
+		ability_yaml_path = 'config/ability_bank.yaml'
+		ability_data = yaml.load_all( open(ability_yaml_path, 'r') )
+		for a in ability_data:
+			new_a = Ability()
+			new_a.setName(a['name'])
+			new_a.setLevelReq(a['level_req'])
+			new_a.setDamage(a['damage'])
+			new_a.setForPlayer(a['for_player'])
+			self.ability_dict[a['id']] = new_a
+			#self.abilities.append(new_a)
+
+		### Load enemy data
+		enemy_yaml = 'config/enemies.yaml'
+		enemy_data = yaml.load_all( open(enemy_yaml, 'r') )
+		for e in enemy_data:
+			new_e = Enemy()
+			id = e['id']
+			#new_e.setPos((e['x'], e['y']))
+			new_e.setName(e['name'])
+			new_e.setHP(e['hp'])	
+			new_e.setMP(e['mp'])
+			new_e.setXP(e['xp'])
+			for a_id in e['abilities']:
+				new_e.addAbility(self.ability_dict[a_id])
+			self.enemies[id] = new_e
 
 	def getRooms(self):
 		return self.rooms
@@ -109,3 +113,10 @@ class Map(object):
 
 	def getEnemies(self):
 		return self.enemies
+
+	def getEnemiesAtPos(self, pos):
+		e_at_pos = []
+		for e in self.enemies:
+			if e.getPos() == pos:
+				e_at_pos.append(e)
+		return e_at_pos

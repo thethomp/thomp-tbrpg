@@ -121,9 +121,22 @@ class CmdLine(cmd.Cmd):
 			print yellow(s) + " unequipped and put into your " + magenta('Inventory') + '.'
 
 	def do_attack( self, s ):
-		enemy = Enemy()
-		i = CombatCmdLine(enemy)
-		i.cmdloop()
+		enemy_name_in = string.lower(s.strip())
+		cur_room = self.map.getRooms()[self.player.getPos()]
+		enemy = None
+		for e_id in cur_room.getEnemies():
+			if enemy_name_in == string.lower(self.map.getEnemies()[e_id].getName()):
+				enemy = self.map.getEnemies()[e_id]
+		if enemy is None:
+			print "There's nothing with the name of " + red(s) + " that is attackable."
+		else:
+			if enemy.getHP() == 0:
+				print enemy.getName() + " has already been defeated!"
+			else:
+				print green_bg(red("Entering combat with " + enemy.getName()))
+				i = CombatCmdLine(self.player, enemy)
+				i.cmdloop()
+		#enemy = self.map.getEnemies()[cur_room.getEnemies()[0]]
 
 	def do_drop( self , s ):
 		cur_room = self.map.getRooms()[self.player.getPos()]
@@ -282,10 +295,24 @@ class CmdLine(cmd.Cmd):
 				print format_string(self.parser.parseDescription(cur_room.west_desc))
 		else:
 			return
+		## Print any items that have been dropped in this room
 		if len(cur_room.getDroppedItems()) > 0:
 			print "=== Dropped Items ==="
 			for i in cur_room.getDroppedItems():
 				print yellow(i.getName())
+		## Print enemies
+		#enemies = self.map.getEnemiesAtPos(self.player.getPos())
+		enemy_bank = self.map.getEnemies()
+		if len(cur_room.getEnemies()) > 0:
+			print red("=== Enemies ===")
+			for e_id in cur_room.getEnemies():
+				if enemy_bank[e_id].getHP() > 0:
+					print enemy_bank[e_id].getName()
+				else:
+					print enemy_bank[e_id].getName() + '   ' + red_bg('*DEFEATED*')
+				print '  HP: ' + str(enemy_bank[e_id].getHP())
+				print '  MP: ' + str(enemy_bank[e_id].getMP())
+				
 
 	def do_move(self, s):
 		global GLOBAL_TIME
@@ -298,7 +325,7 @@ class CmdLine(cmd.Cmd):
 		#global TURBULENCE_STOP_TIME
 		if GLOBAL_TIME == TIME_TO_DIE:
 			self.print_death()
-			return True
+			self.do_launch('')	
 		if OUTSIDE_PLANE:
 			print "You're still flying!!! Or are you falling..."
 			GLOBAL_TIME += 1
@@ -393,7 +420,8 @@ class CmdLine(cmd.Cmd):
 		print 'HP: ' + str(self.player.getHP())
 		print 'MP: ' + str(self.player.getMP())	
 		print 'Strength: ' + str(self.player.getStrength())	
-		print 'Intellect: ' + str(self.player.getIntellect())	
+		print 'Intellect: ' + str(self.player.getIntellect())
+		print 'XP: [ ' + str(self.player.getXP()) + ' / ' + str(self.player.getNextLevelXP()) +' ]'
 
 	def do_save(self, s):
 		save_path = 'saved_games/'
@@ -556,13 +584,17 @@ class CmdLine(cmd.Cmd):
 	#########################
 
 	def print_death(self):
-		print ' ______   ______   ________   _________  ___   ___'       
-		print '/_____/\ /_____/\ /_______/\ /________/\/__/\ /__/\  '    
-		print '\:::_ \ \\\\::::_\/_\::: _  \ \\\\__.::.__\/\::\ \\\\  \ \ '     
-		print ' \:\ \ \ \\\\:\/___/\\\\::(_)  \ \  \::\ \   \::\/_\ .\ \ '   
-		print '  \:\ \ \ \\\\::___\/_\:: __  \ \  \::\ \   \:: ___::\ \ '  
-		print '   \:\/.:| |\:\____/\\\\:.\ \  \ \  \::\ \   \: \ \\\\::\ \ ' 
-		print '    \____/_/ \_____\/ \__\/\__\/   \__\/    \__\/ \::\/ '
+		death_lines = []
+		death_lines.append(' ______   ______   ________   _________  ___   ___')       
+		death_lines.append('/_____/\ /_____/\ /_______/\ /________/\/__/\ /__/\  ')
+		death_lines.append('\:::_ \ \\\\::::_\/_\::: _  \ \\\\__.::.__\/\::\ \\\\  \ \ ')     
+		death_lines.append(' \:\ \ \ \\\\:\/___/\\\\::(_)  \ \  \::\ \   \::\/_\ .\ \ ')   
+		death_lines.append('  \:\ \ \ \\\\::___\/_\:: __  \ \  \::\ \   \:: ___::\ \ ')  
+		death_lines.append('   \:\/.:| |\:\____/\\\\:.\ \  \ \  \::\ \   \: \ \\\\::\ \ ') 
+		death_lines.append('    \____/_/ \_____\/ \__\/\__\/   \__\/    \__\/ \::\/ ')
+		for line in death_lines:
+			print line
+			time.sleep(0.1)
 
 	def print_turb(self):
 		turb_lines = []

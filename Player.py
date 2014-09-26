@@ -1,5 +1,6 @@
-import string
+import string, yaml
 from InteractiveObject import *
+from Ability import *
 
 class Player(object):
 	
@@ -9,27 +10,55 @@ class Player(object):
 		self.equipped = []
 		self.strength = 0
 		self.intellect = 0
-		self.hp = 10
-		self.mp = 10
+		self.hp = 100
+		self.mp = 100
 		self.pos = (0,0)
+		self.xp = 0
+		self.next_level_xp = 100
+		self.level = 1
 
 		### Load player abilities
 		### Load ability data   
-#		ability_yaml_path = 'config/player_abilities.yaml'
-#		ability_data = yaml.load_all( open(ability_yaml_path, 'r') )
-#		for a in ability_data:
-#			new_a = Ability()
-#			new_a.setName(a['name'])
-#			new_a.setLevelReq(a['level_req'])
-#			new_a.setDamage(a['damage'])
-#			new_a.setForPlayer(a['for_player'])
-#			self.abilities.append(new_a)
+		ability_yaml_path = 'config/player_abilities.yaml'
+		ability_data = yaml.load_all( open(ability_yaml_path, 'r') )
+		for a in ability_data:
+			new_a = Ability()
+			new_a.setName(a['name'])
+			new_a.setDescription(a['description'])
+			new_a.setLevelReq(a['level_req'])
+			new_a.setDamage(a['damage'])
+			new_a.setForPlayer(a['for_player'])
+			self.abilities.append(new_a)
+
+	def setLevel(self, level):
+		self.level = level
+
+	def getLevel(self):
+		return self.level
+
+	def setNextLevelXP(self, xp):
+		self.next_level_up = xp
+
+	def getNextLevelXP(self):
+		return self.next_level_xp
+
+	def getXP(self):
+		return self.xp
+
+	def setXP(self, xp):
+		self.xp = xp
 
 	def getHP(self):
 		return self.hp
 
 	def getMP(self):
 		return self.mp
+
+	def setHP(self, hp):
+		self.hp = hp
+
+	def setMP(self, mp):
+		self.mp = mp
 
 	def getPos(self):
 		return self.pos
@@ -86,4 +115,10 @@ class Player(object):
 
 	def getAbilities(self):
 		return self.abilities
+
+	def getAbilityByName(self,name):
+		for abil in self.abilities:
+			if string.lower(abil.getName()) == string.lower(name):
+				return abil
+		return None
 	
